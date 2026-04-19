@@ -1,0 +1,99 @@
+{
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-output-directory=build",
+                "%DOCFILE_EXT%"
+            ]
+        },
+        {
+            "name": "xelatex (podman)",
+            "command": "podman",
+            "args": [
+                "run",
+                "--rm",
+                "-v",
+                "%DIR%:/work:Z",
+                "-w",
+                "/work",
+                "arch-latex:cm",
+                "xelatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-output-directory=build",
+                "%DOCFILE_EXT%"
+            ]
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "build/%DOCFILE%"
+            ]
+        },
+        {
+            "name": "biber (podman)",
+            "command": "podman",
+            "args": [
+                "run",
+                "--rm",
+                "-v",
+                "%DIR%:/work:Z",
+                "-w",
+                "/work",
+                "arch-latex:cm",
+                "/usr/bin/vendor_perl/biber",
+                "build/%DOCFILE%"
+            ]
+        },
+        {
+            "name": "copy-pdf",
+            "command": "cp",
+            "args": [
+                "build/%DOCFILE%.pdf",
+                "%DOCFILE%.pdf"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "XeLaTeX + Biber + XeLaTeX x2 + Copy Pdf",
+            "tools": [
+                "xelatex",
+                "biber",
+                "xelatex",
+                "xelatex",
+                "copy-pdf"
+            ]
+        }
+    ],
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.recipe.default": "lastUsed",
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.bibtex-fields.sort.enabled": true,
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.bcf",
+        "*.blg",
+        "*.log",
+        "*.toc",
+        "*.out",
+        "*.lof",
+        "*.lot"
+    ],
+    "latex-workshop.formatting.latex": "tex-fmt",
+    "latex-workshop.formatting.tex-fmt.args": [
+        "--config",
+        "tex-fmt.toml"
+    ],
+    "files.readonlyInclude": {
+        "markdown/*.md": true
+    }
+}

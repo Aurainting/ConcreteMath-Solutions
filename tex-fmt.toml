@@ -1,0 +1,9 @@
+# tex-fmt.toml
+check = false            # Check mode
+print = false            # Print mode
+wrap = false             # Enable line wrapping
+wraplen = 80             # Line wrap length
+wrapmin = 70             # Target minimum length when wrapping
+tabsize = 2              # Number of spaces per indentation level
+tabchar = "space"        # Use spaces for indentation ("tab" for tabs)
+no-indent-envs = []      # Environments with no indentation

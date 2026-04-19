@@ -1,0 +1,1330 @@
+\section{习题五}
+
+\subsection{热身题}
+
+\begin{problem}{5.1}{1}
+  \( 11^4 \) 是多少？对一个知道二项式系数的人来说，为什么这个数容易计算？
+\end{problem}
+
+在进制 \( b \ (b > 6) \) 的情况下，都有：
+\begin{align*}
+  (11)_b^4 &= (1 + b)^4 \\
+  &= \sum_k \binom{4}{k} b^k \\
+  &= 1 \times b^0 + 4 \times b^1 + 6 \times b^2 + 4 \times b^3 + 1 \times b^4 \\
+  &= (14641)_b
+\end{align*}
+
+因此：\( 11^4 = 14641 \)
+
+\begin{problem}{5.2}{1}
+  当 \( n \) 是一个正整数时，\( k \) 为何值，\( \binom{n}{k} \) 取最大值？证明你的答案。
+\end{problem}
+
+\( k = \lfloor \frac{n}{2} \rfloor \) 和 \( \lceil \frac{n}{2} \rceil \).
+
+证明：当 \( k \ge \lfloor \frac{n}{2} \rfloor \) 时：
+\[
+  \frac{\binom{n}{k+1}}{\binom{n}{k}} = \frac{n-k}{k+1} \le 1
+\]
+当 \( k < \lceil \frac{n}{2} \rceil \) 时：
+\[
+  \frac{\binom{n}{k+1}}{\binom{n}{k}} = \frac{n-k}{k+1} \ge 1
+\]
+
+因此，最大值在 \( k = \lfloor \frac{n}{2} \rfloor \) 以及 \( \lceil \frac{n}{2} \rceil \) 时出现。
+
+\hfill \( \square \)
+
+\begin{problem}{5.3}{1}
+  证明六边形性质：
+  \[
+    \binom{n-1}{k-1} \binom{n}{k+1} \binom{n+1}{k} = \binom{n-1}{k} \binom{n+1}{k+1} \binom{n}{k-1}
+  \]
+\end{problem}
+
+证明：
+\begin{align*}
+  \because
+  \binom{n-1}{k-1} \binom{n}{k+1} \binom{n+1}{k} &= \frac{(n-1)!}{(k-1)! (n-k)!} \frac{n!}{(k+1)! (n-k-1)!} \frac{(n+1)!}{k! (n-k+1)!} \\
+  \binom{n-1}{k} \binom{n+1}{k+1} \binom{n}{k-1} &= \frac{(n-1)!}{k! (n-k-1)!} \frac{(n+1)!}{(k+1)! (n-k)!} \frac{n!}{(k-1)! (n-k+1)!} \\
+  \therefore \binom{n-1}{k-1} \binom{n}{k+1} \binom{n+1}{k} &= \binom{n-1}{k} \binom{n+1}{k+1} \binom{n}{k-1}
+\end{align*}
+\hfill \( \square \)
+
+\begin{problem}{5.4}{1}
+  通过反转上指标（实际上是将负的上指标改变为正的值）来计算 \( \binom{-1}{k} \).
+\end{problem}
+
+\[
+  \binom{-1}{k} = (-1)^k \binom{k}{k} = (-1)^k [k \ge 0]
+\]
+
+\begin{problem}{5.5}{1}
+  设 \( p \) 是一个素数。证明对于 \( 0 < k < p \) 有 \( \binom{p}{k} \bmod p = 0 \)。对二项式系数 \( \binom{p-1}{k} \) 这意味着什么?
+\end{problem}
+
+因为 \( 0 < k < p \) 并且 \( k, p \) 是整数，因此 \( \binom{p}{k} \) 从组合意义上考量必定是整数。又 \( \binom{p}{k} = \frac{p!}{k! (p-k)!} \) 其中有一个因子 \( p \) 无法消去，所以 \( \binom{p}{k} \bmod p = 0 \)
+
+\begin{align*}
+  -1 & \equiv p-1 \pmod{p} \\
+  -2 & \equiv p-2 \pmod{p} \\
+  & \ \vdots \\
+  -k & \equiv p-k \pmod{p} \\[5pt]
+  \Rightarrow (-1)^k k! & \equiv (p-1)^{\underline{k}} \pmod{p} \\[5pt]
+  \because \forall \ i & \in [1, k] \ \rightarrow \ i \ \bot \ p \quad ( \bot : \ \text{互素}) \\
+  \therefore k! & \ \bot\  p \\[5pt]
+  \Rightarrow (-1)^k & \equiv \binom{p-1}{k} \pmod{p}
+\end{align*}
+
+\begin{problem}{5.7}{1}
+  当 \( k < 0 \) 时，\( r^{\underline{k}} (r - \frac{1}{2})^{\underline{k}} = (2r)^{\underline{2k}} / 2^{2k} \) 仍然为真吗？
+\end{problem}
+
+回顾第二章关于负指数的下降幂的一般定义：
+\[
+  x^{\underline{-m}} = \frac{1}{(x+1)(x+2) \cdots (x+m)} \ , \quad m > 0
+\]
+因此：
+\begin{align*}
+  r^{\underline{k}} (r - \frac{1}{2})^{\underline{k}} &= \frac{1}{(r+\frac{1}{2})(r+1)(r+\frac{3}{2})(r+2) \cdots (r-k-\frac{1}{2})(r-k)} \\[6pt]
+  &= \frac{2 \times 2 \times \cdots \times 2}{(2r+1) (2r+2) \cdots (2r-2k-1)(2r-2k)} \\[6pt]
+  &= 2^{-2k} (2r)^{\underline{2k}}
+\end{align*}
+
+\begin{problem}{5.8}{1}
+  计算：
+  \[
+    \sum_k \binom{n}{k} (-1)^k (1-k/n)^n
+  \]
+  当 \( n \) 非常大时这个和式的近似值是什么？\textit{提示：}对某个函数 \( f \)，该和式等于 \( \Delta^n f(0) \).
+\end{problem}
+
+由 \( n \) 阶差分的公式：
+\[
+  \Delta^n f(x) = \sum_k \binom{n}{k} (-1)^{n-k} f(x+k) \ , \ \text{整数} \ n \ge 0
+\]
+当 \( x = 0 \) 时：
+\begin{align*}
+  \Delta^n f(0) &= \sum_k \binom{n}{k} (-1)^{n-k} f(k) \\
+  \text{故只要令} \ f(k) &= (\frac{k}{n} - 1)^n \\
+  \text{就有：} \ \Delta^n f(0)  &= \sum_k \binom{n}{k} (-1)^{n-k} (-1)^n (1-\frac{k}{n})^n \\
+  &= \sum_k \binom{n}{k} (-1)^{n-k} (-1)^{-n} (1-\frac{k}{n})^n \\
+  &= \sum_k \binom{n}{k} (-1)^{k} (1-\frac{k}{n})^n
+\end{align*}
+
+而 \( f(k) \) 是一个 \( n \) 次多项式，将它展开为牛顿级数，其中的首项 \( a_n k^n \) 中 \( a_n = n^{-n} \)。因此：\( \Delta^n f(0) = n^{-n} n! \)
+
+当 \( n \) 非常大时，运用斯特林近似：
+\[
+  \frac{n!}{n^n} \approx \frac{\sqrt{2 \pi n}}{e^n}
+\]
+
+\begin{problem}{5.9}{1}
+  证明 \( \mathcal{E}_t (z) = \sum_{k \ge 0} (tk+1)^{k-1} \frac{z^k}{k!} \) 中的广义指数级数 \( \mathcal{E}_t (z) \) 服从规则：
+  \[
+    \mathcal{E}_t (z) = \mathcal{E} (tz)^{1/t} \ , \quad t \neq 0
+  \]
+  这里 \( \mathcal{E} (z) \) 是 \( \mathcal{E}_1 (z) \) 的缩写。
+\end{problem}
+
+根据公式：
+\[
+  \mathcal{E}_t (z)^r = \sum_{k \ge 0} r \frac{(tk + r)^{k-1}}{k!} z^k
+\]
+有：
+\begin{align*}
+  \mathcal{E} (tz)^{\frac{1}{t}} &= \sum_{k \ge 0} \frac{1}{t} \frac{(k + \frac{1}{t})^{k-1}}{k!} (tz)^k \\
+  &= \sum_{k \ge 0} \frac{(kt + 1)^{k-1}}{k!} z^k \\
+  &= \mathcal{E}_t (z) \ , \quad t \ne 0
+\end{align*}
+
+\begin{problem}{5.10}{1}
+  证明 \( -2 (\ln{(1-z)} + z) / z^2 \) 是超几何函数。
+\end{problem}
+
+\begin{align*}
+  \because
+  \ln{(1+z)} &= z F
+  \left( \left.
+    \begin{array}{cccc}
+      1, 1 \\
+      2
+  \end{array} \right|{-z} \right) \\
+  &= z \sum_{k \ge 0} \frac{k! k!}{(k+1)!} \frac{(-z)^k}{k!} \\
+  \therefore \ln{(1-z)} &= - \sum_{k \ge 0} \frac{z^{k+1}}{k+1} \\
+  \Rightarrow \frac{-2 (\ln{(1-z)} + z)}{z^2} &= \frac{2 \sum_{k \ge 0} \frac{z^{k+1}}{k+1} - 2z}{z^2} \\
+  &= \sum_{k \ge 0} \frac{2 z^k}{k+2} \\
+  \therefore \frac{t_{k+1}}{t_k} &= \frac{(k+2) z}{(k+3)} \\[6pt]
+  \Rightarrow \frac{-2 (\ln{(1-z)} + z)}{z^2} &= F
+  \left( \left.
+    \begin{array}{cccc}
+      2, 1 \\
+      3
+  \end{array} \right|{z} \right)
+\end{align*}
+
+\begin{problem}{5.11}{1}
+  将两个函数：
+  \begin{align*}
+    \sin{z} &= z - \frac{z^3}{3!} + \frac{z^5}{5!} - \frac{z^7}{7!} + \cdots \\
+    \arcsin{z} &= z + \frac{1 \times z^3}{2 \times 3} + \frac{1 \times 3 \times z^5}{2 \times 4 \times 5} + \frac{1 \times 3 \times 5 \times z^7}{2 \times 4 \times 6 \times 7} + \cdots
+  \end{align*}
+  用超几何级数的项表示出来。
+\end{problem}
+
+\begin{align*}
+  \sin{z} &= \sum_{k \ge 0}  \frac{(-1)^k}{(2k+1)!} z^{2k+1} \\
+  \Rightarrow \frac{t_{k+1}}{t_k} &= \frac{1}{(2k+3)(2k+2)} (-z^2) \\
+  &= \frac{(k+1)}{(k+ \frac{3}{2}) (k+1) (k+1)} \frac{-z^2}{4} \\[6pt]
+  \Rightarrow \sin{z} &= z F
+  \left( \left.
+    \begin{array}{cccc}
+      1 \\
+      \frac{3}{2} , 1
+  \end{array} \right|{\frac{-z^2}{4}} \right)
+\end{align*}
+
+\begin{align*}
+  \arcsin{z} &= \sum_{k \ge 0} \frac{(\frac{1}{2})^{\overline{k}}}{(2k+1) k!} z^{2k+1} \\
+  \Rightarrow \frac{t_{k+1}}{t_k} &= \frac{(k+ \frac{1}{2})(2k+1)}{(2k+3)(k+1)} z^2 \\[6pt]
+  \Rightarrow \arcsin{z} &= z F
+  \left( \left.
+    \begin{array}{cccc}
+      \frac{1}{2}, \frac{1}{2} \\
+      \frac{3}{2}
+  \end{array} \right|{z^2} \right)
+\end{align*}
+
+\subsection{基础题}
+
+\begin{problem}{5.13}{1}
+  找出超阶乘函数 \( P_n = \prod_{k=1}^n k! \)，\( Q_n = \prod_{k=1}^n k^k \) 以及乘积 \( R_n = \prod_{k=0}^n \binom{n}{k} \) 之间的关系。
+\end{problem}
+
+\begin{align*}
+  \because P_n^2 &= (0! \ n!) (1! \ (n-1)!) \dots (n! \ 0!) \\
+  \therefore R_n &= \frac{(n!)^{n+1}}{P_n^2}\\[8pt]
+  \because P_n \cdot R_n &= 1 \cdot n \cdot n(n-1) \dots n! \\
+  &= n^n (n-1)^{n-1} \dots 1^1 \\
+  \therefore P_n \cdot R_n &= Q_n
+\end{align*}
+
+\begin{problem}{5.14}{1}
+  在范德蒙德卷积 \( \sum_k \binom{r}{m+k} \binom{s}{n-k} = \binom{r+s}{m+n} \)，\( m, n \) 是整数，中用反转上指标的方法证明恒等式 \( \sum_{k \le l} \binom{l-k}{m} \binom{s}{k-n} (-1)^k = (-1)^{l+m} \binom{s-m-1}{l-m-n} \)，整数 \( l, m, n \ge 0 \)。然后指出，另一个反转得到 \( \sum_{-q \le k \le l} \binom{l-k}{m} \binom{q+k}{n} =  \binom{l+q+1}{m+n+1} \)，整数 \( m, n \ge 0 \)，整数 \( l + q \ge 0 \).
+\end{problem}
+
+证明：
+\begin{align*}
+  \sum_{k \le l} \binom{l-k}{m} \binom{s}{k-n} (-1)^k &= \sum_{k \le l} \binom{l-k}{l-k-m} \binom{s}{k-n} (-1)^{k} \\
+  &= \sum_{k \le l} \binom{-m-1}{l-k-m} \binom{s}{k-n} (-1)^{l-m} \\
+  &= (-1)^{l-m} \binom{s-m-1}{l-m-n} \ , \ \text{整数} \ l, m, n \ge 0 \\[6pt]
+  \sum_{-q \le k \le l} \binom{l-k}{m} \binom{q+k}{n} &= \sum_{-q \le k \le l} \binom{l-k}{l-k-m} \binom{q+k}{q+k-n} \\
+  &= \sum_{-q \le k \le l} \binom{-m-1}{l-k-m} \binom{-n-1}{q+k-n} (-1)^{l+q-m-n} \\
+  &= \sum_k \binom{-m-1}{l-k-m} \binom{-n-1}{q+k-n} (-1)^{l+q-m-n} \\
+  &= \binom{-m-n-2}{l+q-m-n} (-1)^{l+q-m-n} \\
+  &= \binom{l+q+1}{l+q-m-n} \\
+  &= \binom{l+q+1}{m+n+1} \ , \ \text{整数} m, n \ge 0 \ , \ \text{整数} l + q \ge 0
+\end{align*}
+\hfill \( \square \)
+
+\begin{problem}{5.15}{1}
+  \( \sum_k \binom{n}{k}^3 (-1)^k \) 等于多少？\textit{提示：}\( \sum_k \binom{a+b}{a+k} \binom{b+c}{b+k} \binom{c+a}{c+k} (-1)^k = \frac{(a+b+c)!}{a!b!c!} \)，整数 \( a, b, c \ge 0 \).
+\end{problem}
+
+\begin{enumerate}
+  \item[1.] 若 \( n \) 是奇数：
+    当 \( k \) 是奇数时，\( n-k \) 为偶数；而当 \( k \) 是偶数时，\( n-k \) 是奇数。因此：
+    \[
+      \binom{n}{k}^3 (-1)^k + \binom{n}{n-k}^3 (-1)^{n-k} = 0
+    \]
+    并且 \( \sum_k \binom{n}{k}^3 (-1)^k \) 共有偶数个项，其中两两之和为零，所以总和为零。
+
+  \item[2.] 若 \( n \) 是偶数，不妨设为 \( n = 2m \ , \ m \ge 0 \)
+    由公式（令 \( a = b = c = m \)）:
+    \begin{gather*}
+      \sum_{k} \binom{2m}{m+k}^3 (-1)^k = \frac{(3m)!}{(m!)^3} \\
+      \Rightarrow
+      \sum_{-m+k} \binom{2m}{k}^3 (-1)^{-m+k} = \frac{(3m)!}{(m!)^3} \\
+      \Rightarrow
+      \sum_k \binom{2m}{k}^3 (-1)^k = \frac{(3m)!}{(m!)^3} (-1)^m
+    \end{gather*}
+\end{enumerate}
+
+\begin{problem}{5.16}{1}
+  计算和式：
+  \[
+    \sum_k \binom{2a}{a+k} \binom{2b}{b+k} \binom{2c}{c+k} (-1)^k
+  \]
+  其中 \( a, b, c \) 为非负整数。
+\end{problem}
+
+\begin{align*}
+  &\phantom{=} \sum_k \binom{2a}{a+k} \binom{2b}{b+k} \binom{2c}{c+k} (-1)^k \\
+  &= \frac{(2a)! (2b)! (2c)!}{(a+b)! (b+c)! (c+a)!} \sum_k \binom{a+b}{a+k} \binom{b+c}{b+k} \binom{c+a}{c+k} (-1)^k \\
+  &= \frac{(2a)! (2b)! (2c)!}{(a+b)! (b+c)! (c+a)!} \frac{(a+b+c)!}{a! b! c!}
+\end{align*}
+
+\begin{problem}{5.17}{1}
+  找出 \( \binom{2n-1/2}{n} \) 与 \( \binom{2n-1/2}{2n} \) 之间的一个简单关系。
+\end{problem}
+
+\begin{align*}
+  \binom{2n}{n} \binom{2n - 1/2}{n} &= \frac{\binom{4n}{2n} \binom{2n}{n}}{2^{2n}} \\
+  \Rightarrow
+  \binom{2n - 1/2}{n} &= \frac{\binom{4n}{2n}}{2^{2n}} \\[6pt]
+  \binom{2n-1/2}{2n} &= \frac{\binom{4n}{2n}}{2^{4n}} \\[6pt]
+  \Rightarrow
+  \binom{2n-1/2}{n} &= \binom{2n-1/2}{2n} \cdot 2^{2n}
+\end{align*}
+
+\begin{problem}{5.18}{1}
+  找出乘积
+  \[
+    \binom{r}{k} \binom{r-1/3}{k} \binom{r-2/3}{k}
+  \]
+  与 \( \binom{r}{k} \binom{r-1/2}{k} = \binom{2r}{2k} \binom{2k}{k} / 2^{2k} \) 类似的另一种形式。
+\end{problem}
+
+\begin{align*}
+  &\phantom{=} r^{\underline{k}} (r - \frac{1}{3})^{\underline{k}} (r - \frac{2}{3})^{\underline{k}} \\
+  &= r (r-\frac{1}{3}) (r-\frac{2}{3}) \dots (r-k+1) (r-k+\frac{2}{3}) (r-k+\frac{1}{3}) \\
+  &= \frac{(3r)(3r-1) \dots (3r-3k+1)}{3 \times 3 \times \cdots \times 3} \\
+  &= \frac{(3r)^{\underline{3k}}}{3^{3k}}
+  \Rightarrow
+  \binom{r}{k} \binom{r-1/3}{k} \binom{r-2/3}{k} = \frac{\binom{3r}{3k} \binom{3k}{2k} \binom{2k}{k}}{3^{3k}} = \frac{\binom{3r}{3k} \binom{3k}{k,k,k}}{3^{3k}}
+\end{align*}
+
+\begin{problem}{5.19}{1}
+  证明：\( \mathcal{B}_t (z) = \sum_{k \ge 0} (tk)^{\underline{k-1}} \frac{z^k}{k!} \) 中的广义二项级数 \( \mathcal{B}_t (z) \) 服从规则：
+  \[
+    \mathcal{B}_t (z) = \mathcal{B}_{1-t} (-z)^{-1}
+  \]
+\end{problem}
+
+证明：
+\begin{align*}
+  \mathcal{B}_{1-t} (-z)^{-1} &= \sum_{k \ge 0} \binom{(1-t)k - 1}{k} \frac{-1}{(1-t)k - 1} (-z)^k \\
+  &= \sum_{k \ge 0} \frac{(k-tk-2)^{\underline{k-1}}}{k!} (-1)^{k+1} (z)^k \\
+  &= \sum_{k \ge 0} \frac{(tk)^{\underline{k-1}}}{k!} z^k \\
+  &= \mathcal{B}_t (z)
+\end{align*}
+
+\begin{problem}{5.20}{1}
+  在
+  \[
+    F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1, \cdots, a_m \\
+        b_1, \cdots, b_n
+    \end{array} \right|{z} \right) = \sum_{k \ge 0} \frac{a_1^{\overline{k}} \cdots a_m^{\overline{k}} z^k}{b_1^{\overline{k}} \cdots b_n^{\overline{k}} k!}
+  \]
+  中用下降幂代替上升幂，用公式：
+  \[
+    G
+    \left( \left.
+      \begin{array}{cccc}
+        a_1, \cdots, a_m \\
+        b_1, \cdots, b_n
+    \end{array} \right|{z} \right) = \sum_{k \ge 0} \frac{a_1^{\underline{k}} \cdots a_m^{\underline{k}} z^k}{b_1^{\underline{k}} \cdots b_n^{\underline{k}} k!}
+  \]
+  定义广义降噪几何级数，解释 \( G \) 与 \( F \) 有何关系。
+\end{problem}
+
+由习题~\ref{problem:2.17}~知：\( x^{\underline{m}} = (-1)^m (-x)^{\overline{m}} \)
+所以：
+\[
+  G
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, \cdots, a_m \\
+      b_1, \cdots, b_n
+  \end{array} \right|{z} \right)
+  =
+  F
+  \left( \left.
+    \begin{array}{cccc}
+      -a_1, \cdots, -a_m \\
+      -b_1, \cdots, -b_n
+  \end{array} \right|{(-1)^{m-n} z} \right)
+\]
+
+\begin{problem}{5.21}{1}
+  证明：当 \( z=m \) 是正整数时，\( \lim_{n \to + \infty} \binom{n+z}{n} n^{-z} \) 的极限是 \( 1/m! \)，以此来证明欧拉对阶乘的定义与通常的定义一致。
+\end{problem}
+
+\begin{align*}
+  &\because \lim_{n \to \infty} \frac{(n+m)!}{n! \ n^m} = \lim_{n \to \infty} \frac{(n+1) \dots (n+m)}{n^m} = 1 \\
+  &\therefore \lim_{n \to \infty} \binom{n+m}{n} n^{-m} = \frac{1}{m!}
+\end{align*}
+
+\begin{problem}{5.22}{1}
+  利用 \( \frac{1}{z!} = \lim_{n \to + \infty} \binom{n+z}{n} n^{-z} \) 证明阶乘加倍公式：
+  \[
+    x! \left( x - \frac{1}{2} \right)! = (2x)! \left(- \frac{1}{2} \right)! / 2^{2x}
+  \]
+\end{problem}
+
+证明：
+\begin{align*}
+  \frac{(-\frac{1}{2})!}{x! (x-\frac{1}{2})!} &= \lim_{n \to \infty} \frac{\binom{n+x}{n} n^{-x} \binom{n+x-\frac{1}{2}}{n} n^{-x+\frac{1}{2}}}{\binom{n-\frac{1}{2}}{n} n^{\frac{1}{2}}} \\
+  &= \lim_{n \to \infty} \frac{\binom{2n+2x}{2n} \binom{2n}{n} / 2^{2n}}{\binom{2n}{n} / 2^{2n}} n^{-2x} \\
+  &= \lim_{n \to \infty} \binom{2n+2x}{2n} n^{-2x} \\
+  \frac{2^{2x}}{(2x)!} &= \lim_{n \to \infty} \binom{n+2x}{n} n^{-2x} \cdot 2^{2x} \\
+  &= \lim_{n \to \infty} \binom{2n+2x}{2n} (2n)^{-2x} \cdot 2^{2x} \\
+  &= \lim_{n \to \infty} \binom{2n+2x}{2n} n^{-2x} \\
+  \Rightarrow
+  \frac{(-\frac{1}{2})!}{x! (x-\frac{1}{2})!} &= \frac{2^{2x}}{(2x)!} \\
+  \Rightarrow
+  x! \left( x - \frac{1}{2} \right)! &= \frac{(2x)! \left(- \frac{1}{2} \right)!}{2^{2x}}
+\end{align*}
+\hfill \( \square \)
+
+\begin{problem}{5.23}{1}
+  \( F(-n,1;;1) \) 的值是什么？
+\end{problem}
+
+\begin{align*}
+  F(-n,1;;1) &= \sum_k \frac{(-n)^{\overline{k}} 1^{\overline{k}}}{k!} \\
+  &= \sum_{0 \le k \le n} \frac{n^{\underline{k}}}{k!} (-1)^k k! \\
+  &= (-1)^n n \text{\textexclamdown}
+\end{align*}
+
+\begin{problem}{5.24}{1}
+  用超几何级数求 \( \sum_k \binom{n}{m+k} \binom{m+k}{2k} 4^k \).
+\end{problem}
+
+第 \( k \) 项：
+\begin{align*}
+  t_k &= \frac{n! \ (m+k)!}{(m+k)! \ (n-m-k)! \ (2k)! \ (m-k)!} 4^k \\
+  &= \frac{n!}{(n-m-k)! \ (2k)! \ (m-k)!} 4^k
+\end{align*}
+所以：
+\begin{align*}
+  \frac{t_{k+1}}{t_k} &= \frac{(n-m-k) (m-k)}{(2k+1) (2k+2)} 4 \\[6pt]
+  \therefore & \ \sum_k \binom{n}{m+k} \binom{m+k}{2k} 4^k \\
+  &= \binom{n}{m} F
+  \left( \left.
+    \begin{array}{cccc}
+      m-n, -m \\
+      \frac{1}{2}
+  \end{array} \right|{1} \right) \\
+  &= \binom{n}{m} \frac{(\frac{1}{2} - m + n)^{\overline{m}}}{(\frac{1}{2})^{\overline{m}}} \\
+  &= \frac{\binom{n}{m} \binom{n-\frac{1}{2}}{m}}{\binom{m-\frac{1}{2}}{m}} \\
+  &= \binom{2n}{2m}
+\end{align*}
+
+\begin{problem}{5.25}{1}
+  证明：
+  \begin{align*}
+    &\phantom{=} (a_1 - b_1) F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1, a_2, \cdots, a_m \\
+        b_1+1, b_2, \cdots, b_n
+    \end{array} \right|{z} \right) \\
+    &=
+    a_1 F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1+1, a_2, \cdots, a_m \\
+        b_1+1, b_2, \cdots, b_n
+    \end{array} \right|{z} \right)
+    - b_1 F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1, a_2, \cdots, a_m \\
+        b_1, b_2, \cdots, b_n
+    \end{array} \right|{z} \right)
+  \end{align*}
+  求超几何级数
+  \[
+    F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1, a_2, a_3 \cdots, a_m \\
+        b_1, \cdots, b_n
+    \end{array} \right|{z} \right) \ , \quad
+    F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1+1, a_2, a_3 \cdots, a_m \\
+        b_1, \cdots, b_n
+    \end{array} \right|{z} \right)
+  \]
+  以及
+  \[
+    F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1, a_2+1, a_3, \cdots, a_m \\
+        b_1, \cdots, b_n
+    \end{array} \right|{z} \right)
+  \]
+  之间的类似关系。
+\end{problem}
+
+证明：利用 \( \vartheta \) 算子 \( (\vartheta = z \frac{d}{dz}) \) ：
+\begin{align*}
+  & \quad (a_1 - b_1) F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, a_2, \cdots, a_m \\
+      b_1+1, b_2, \cdots, b_n
+  \end{array} \right|{z} \right) \\[5pt]
+  &= (a_1 + \vartheta) F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, a_2, \cdots, a_m \\
+      b_1+1, b_2, \cdots, b_n
+  \end{array} \right|{z} \right) -
+  (b_1 + \vartheta) F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, a_2, \cdots, a_m \\
+      b_1+1, b_2, \cdots, b_n
+  \end{array} \right|{z} \right) \\[5pt]
+  &= \sum_{k \ge 0} \frac{(k + a_1) a_1^{\overline{k}} \cdots a_m^{\overline{k}} z^k}{(b_1+1)^{\overline{k}} \cdots b_n^{\overline{k}} k!} - \sum_{k \ge 0} \frac{b_1 (k + b_1) a_1^{\overline{k}} \cdots a_m^{\overline{k}} z^k}{b_1 (b_1+1)^{\overline{k}} \cdots b_n^{\overline{k}} k!} \\[5pt]
+  &= a_1 F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1 + 1, a_2, \cdots, a_m \\
+      b_1+1, b_2, \cdots, b_n
+  \end{array} \right|{z} \right) -
+  b_1 F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, a_2, \cdots, a_m \\
+      b_1, b_2, \cdots, b_n
+  \end{array} \right|{z} \right)
+\end{align*}
+\hfill \( \square \)
+
+同理可得：
+\begin{align*}
+  & \quad (a_1 - a_2) F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, a_2, a_3 \cdots, a_m \\
+      b_1, \cdots, b_n
+  \end{array} \right|{z} \right) \\[5pt]
+  &= (a_1 + \vartheta) F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, a_2, a_3 \cdots, a_m \\
+      b_1, \cdots, b_n
+  \end{array} \right|{z} \right) -
+  (a_2 + \vartheta) F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, a_2, a_3 \cdots, a_m \\
+      b_1, \cdots, b_n
+  \end{array} \right|{z} \right) \\[5pt]
+  &= a_1 F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1+1, a_2, a_3 \cdots, a_m \\
+      b_1, \cdots, b_n
+  \end{array} \right|{z} \right) -
+  a_2 F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, a_2+1, a_3 \cdots, a_m \\
+      b_1, \cdots, b_n
+  \end{array} \right|{z} \right)
+\end{align*}
+
+\begin{problem}{5.26}{1}
+  将公式
+  \[
+    F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1, \cdots, a_m \\
+        b_1, \cdots, b_n
+    \end{array} \right|{z} \right) = 1 + G(z)
+  \]
+  中的函数 \( G(z) \) 表示成一个超几何级数的倍数。
+\end{problem}
+
+\begin{gather*}
+  F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, \cdots, a_m \\
+      b_1, \cdots, b_n
+  \end{array} \right|{z} \right) = \sum_{k \ge 0} t_k \ , \ t_k = \frac{a_1^{\overline{k}} \cdots a_m^{\overline{k}} z^k}{b_1^{\overline{k}} \cdots b_n^{\overline{k}} k!} \\
+  \xrightarrow{t_0 = 1} F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, \cdots, a_m \\
+      b_1, \cdots, b_n
+  \end{array} \right|{z} \right) - 1 = \sum_{k \ge 0} t_{k+1} \\
+  \Rightarrow
+  G(z) = \frac{a_1 \cdots a_m z}{b_1 \cdots b_n}
+  \left( \left.
+    \begin{array}{cccc}
+      a_1+1, \cdots, a_m+1, 1 \\
+      b_1+1, \cdots, b_n+1, 2
+  \end{array} \right|{z} \right)
+\end{gather*}
+
+\begin{problem}{5.27}{1}
+  证明：
+  \begin{align*}
+    &\phantom{=} F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1, a_1 + \frac{1}{2}, \cdots, a_m, a_m + \frac{1}{2} \\
+        b_1, b_1 + \frac{1}{2}, \cdots, b_n, b_n + \frac{1}{2}, \frac{1}{2}
+    \end{array} \right|{(2^{m-n-1} z)^2} \right) \\
+    &=
+    \frac{1}{2} \left(
+      F
+      \left( \left.
+        \begin{array}{cccc}
+          2a_1, \cdots, 2a_m \\
+          2b_1, \cdots, 2b_n
+      \end{array} \right|{z} \right)
+      +
+      F
+      \left( \left.
+        \begin{array}{cccc}
+          2a_1, \cdots, 2a_m \\
+          2b_1, \cdots, 2b_n
+    \end{array} \right|{-z} \right) \right).
+  \end{align*}
+\end{problem}
+
+注意到右边就是 \( F(2a_1,\cdots,2a_m; 2b_1,\cdots,2b_n; z) \) 偶数项的和式，因此：
+\begin{align*}
+  \frac{t_{k+1}}{t_k} &= \frac{(2a_1)^{\overline{2k+2}} \cdots (2a_m)^{\overline{2k+2}} z^{2k+2}}{(2b_1)^{\overline{2k+2}} \cdots (2b_n)^{\overline{2k+2}} (2k+2)!} \cdot \frac{(2b_1)^{\overline{2k}} \cdots (2b_n)^{\overline{2k}} (2k)!}{(2a_1)^{\overline{2k}} \cdots (2a_m)^{\overline{2k}} z^{2k}} \\
+  &= \frac{(a_1+k)(a_1+k+\frac{1}{2}) \cdots (a_m+k)(a_m+k+\frac{1}{2}) (2^m z)^2}{(b_1+k)(b_1+k+\frac{1}{2}) \cdots (b_n+k)(b_n+k+\frac{1}{2}) (2^{2n+2}) (k+\frac{1}{2})(k+1)} \\
+  &= F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, a_1 + \frac{1}{2}, \cdots, a_m, a_m + \frac{1}{2} \\
+      b_1, b_1 + \frac{1}{2}, \cdots, b_n, b_n + \frac{1}{2}, \frac{1}{2}
+  \end{array} \right|{(2^{m-n-1} z)^2} \right)
+\end{align*}
+
+\begin{problem}{5.28}{1}
+  应用普法夫的反射定律：
+  \[
+    \frac{1}{(1-z)^a} F
+    \left( \left.
+      \begin{array}{cccc}
+        a, b \\
+        c
+    \end{array} \right|{\frac{-z}{1-z}} \right)
+    =
+    F
+    \left( \left.
+      \begin{array}{cccc}
+        a, c-b \\
+        c
+    \end{array} \right|{z} \right)
+  \]
+  两次，证明欧拉恒等式：
+  \[
+    F
+    \left( \left.
+      \begin{array}{cccc}
+        a, b \\
+        c
+    \end{array} \right|{z} \right)
+    =
+    (1-z)^{c-a-b} F
+    \left( \left.
+      \begin{array}{cccc}
+        c-a, c-b \\
+        c
+    \end{array} \right|{z} \right)
+  \]
+\end{problem}
+
+证明：
+\begin{align*}
+  F
+  \left( \left.
+    \begin{array}{cccc}
+      a, b \\
+      c
+  \end{array} \right|{z} \right) &= \frac{1}{(1-z)^a} F
+  \left( \left.
+    \begin{array}{cccc}
+      a, c-b \\
+      c
+  \end{array} \right|{\frac{-z}{1-z}} \right) \\
+  &= \frac{1}{(1-z)^a} \frac{1}{(1-z)^{b-c}} F
+  \left( \left.
+    \begin{array}{cccc}
+      c-a, c-b \\
+      c
+  \end{array} \right|{z} \right) \\
+  &= (1-z)^{c-a-b} F
+  \left( \left.
+    \begin{array}{cccc}
+      c-a, c-b \\
+      c
+  \end{array} \right|{z} \right)
+\end{align*}
+\hfill \( \square \)
+
+（如果对这里 \( (1-z) \) 的指数有什么疑惑，可以参考一下习题~\ref{problem:5.50}）
+
+\begin{problem}{5.29}{1}
+  证明：合流超几何级数满足：
+  \[
+    e^z F
+    \left( \left.
+      \begin{array}{cccc}
+        a \\
+        b
+    \end{array} \right|{-z} \right)
+    =
+    F
+    \left( \left.
+      \begin{array}{cccc}
+        b-a \\
+        b
+    \end{array} \right|{z} \right)
+  \]
+\end{problem}
+
+沿用书中~\cite{graham1994concrete}~的记号，用 \( [z^n] A(z) \) 表示 \( A(z) \) 中 \( z^n \) 的系数：
+\begin{align*}
+  & \quad [z^n] ( e^z F
+    \left( \left.
+      \begin{array}{cccc}
+        a \\
+        b
+  \end{array} \right|{-z} \right) ) \\
+  &= \sum_{k=0}^n \frac{1}{(n-k)!} \frac{a^{\overline{k}} (-1)^k}{b^{\overline{k}} k!} \\
+  &= \frac{1}{n!} \sum_{k=0}^n \frac{(-1)^k n!}{k! (n-k)!} \frac{\Gamma{(a+k)} / \Gamma{(a)}}{\Gamma{(b+k)} / \Gamma{(b)}} \\
+  &= \frac{1}{n!} \sum_{k=0}^n (-1)^k \binom{n}{k} \frac{\Gamma{(a+k)} \Gamma{(b)} \Gamma{(a-b+1)} \Gamma{(b-a+1)}}{\Gamma{(b+k)} \Gamma{(a)} \Gamma{(a-b+1)} \Gamma{(b-a+1)}} \\
+  &= \frac{\Gamma{(a-b+1)} \Gamma{(b-a+1)}}{n!} \binom{b-1}{a-1} \sum_{k=0}^n (-1)^k \binom{n}{k} \binom{a+k-1}{a-b} \\
+  &= \frac{\Gamma{(a-b+1)} \Gamma{(b-a+1)}}{n!} \binom{b-1}{a-1} (-1)^n \binom{a-1}{a-b-n} \\
+  &= \frac{(-1)^n \Gamma{(a-b+1)} \Gamma{(b)}}{\Gamma{(a-b-n+1)} \Gamma{(b+n)} n!} \\
+  &= \frac{(-1)^n (a-b)^{\underline{n}}}{b^{\overline{n}} n!} \\
+  &= \frac{(b-a)^{\overline{n}}}{b^{\overline{n}} n!} \\
+  &= [z^n]
+  F
+  \left( \left.
+    \begin{array}{cccc}
+      b-a \\
+      b
+  \end{array} \right|{z} \right)
+\end{align*}
+
+即证：
+\[
+  e^z F
+  \left( \left.
+    \begin{array}{cccc}
+      a \\
+      b
+  \end{array} \right|{-z} \right)
+  =
+  F
+  \left( \left.
+    \begin{array}{cccc}
+      b-a \\
+      b
+  \end{array} \right|{z} \right)
+\]
+\hfill \( \square \)
+
+\begin{problem}{5.30}{1}
+  什么样的超几何级数 \( F \) 满足 \( zF'(z) + F(z) = 1 / (1-z) \)？
+\end{problem}
+
+\begin{align}
+  zF'(z) + F(z) &= 1 / (1-z) \tag{1} \label{eq:1} \\
+  \xrightarrow{\text{两边求导}} F'(z) + z F''(z) + F'(z) &= \frac{1}{(1-z)^2} \tag{2} \label{eq:2}
+\end{align}
+
+将~\ref{eq:1}~代入~\ref{eq:2}~式，得到：
+\begin{gather*}
+  2 F'(z) + z F''(z) = \frac{1}{1-z} (zF'(z) + F(z)) \\
+  \Rightarrow z(1-z) F''(z) + (2 - 3z) F'(z) - F(z) = 0
+\end{gather*}
+
+假设 \( F(z) = F(a,b;c;z) \)，由公式：\( D(\vartheta + b_1 - 1) \cdots (\vartheta + b_n -1) F = (\vartheta + a_1) \cdots (\vartheta + a_m) F \)，（\( D \) 是算子 \( \frac{d}{dz} \)），所以：\( D(\vartheta + c - 1) F = (\vartheta + a) (\vartheta + b) F \)
+
+即：\( z(1-z) F''(z) + (c-z(a+b+1))F'(z) - abF(z) = 0 \)
+
+因此：
+\[
+  F = F
+  \left( \left.
+    \begin{array}{cccc}
+      1, 1 \\
+      2
+  \end{array} \right|{z} \right)
+\]
+
+\begin{problem}{5.31}{1}
+  证明：如果 \( f(k) \) 是任何一个可用超几何项求和的函数，那么 \( f \) 本身就是一个超几何项。例如，如果 \( \sum f(k) \delta k = c F(A_1, \cdots , A_M; B_1, \cdots , B_N; Z)_k + C \)，那么就存在常数 \( a_1, \cdots, a_m, b_1, \cdots b_n \) 和 \( z \)，使得 \( f(k) \) 是 \( F(a_1,\cdots,a_m;b_1,\cdots,b_n;z)_k \) 的倍数。
+\end{problem}
+
+如果 \( f(k) \) 是任何一个可用超几何项求和的函数，由 \( \text{Gosper} \) 算法：
+\[
+  f(k) = T(k+1) - T(k)
+\]
+\( T(k) \) 是超几何项，因此：
+\[
+  \frac{f(k+1)}{f(k)} = \frac{T(k+2)- T(k+1)}{T(k+1) - T(k)}
+\]
+是一个 \( k \) 的有理函数。所以 \( f \) 是超几何项。
+
+\begin{problem}{5.32}{1}
+  用 \( \text{Gosper} \) 方法求 \( \sum k^2 \delta k \).
+\end{problem}
+
+\begin{gather*}
+  \because t(k) = k^2 \\
+  \therefore \frac{t(k+1)}{t(k)} = \frac{(k+1)^2}{k^2} = \frac{p(k+1)}{p(k)} \frac{q(k)}{r(k+1)}
+\end{gather*}
+直接令：\( p(k) = k^2 \ , \ q(k) = r(k) = 1 \)，因此 \( s(k) \) 应满足：\( k^2 = s(k+1) - s(k) \)
+\begin{align*}
+  \because s(2) - s(1) &= 1^2 \\
+  s(3) - s(2) &= 2^2 \\
+  & \ \vdots \\
+  s(k) - s(k-1) &= (k-1)^2 \\
+  \therefore s(k) = \frac{1}{3} k (k-\frac{1}{2}) & (k-1) + s(1)
+\end{align*}
+所以有：
+\begin{gather*}
+  T(k) = \frac{r(k) s(k) t(k)}{p(k)} = s(k) \\
+  \sum k^2 \delta k = \frac{1}{3} k (k-\frac{1}{2}) (k-1) + C
+\end{gather*}
+
+\begin{problem}{5.33}{1}
+  利用 \( \text{Gosper} \) 方法求 \( \sum \delta k / (k^2 - 1) \).
+\end{problem}
+
+\begin{gather*}
+  \because t(k) = \frac{1}{k^2 - 1} \\
+  \therefore \frac{t(k+1)}{t(k)} = \frac{k^2 - 1}{k^2 + 2k} = \frac{p(k+1)}{p(k)} \frac{q(k)}{r(k+1)}
+\end{gather*}
+取 \( p(k) = k \)，\( q(k) = k-1 \)，\( r(k) = k+1 \) 即可满足条件：\( (k+\alpha) \setminus q(k) \) 以及 \( (k+\beta) \setminus r(k) \Rightarrow \alpha - \beta \) 不是正整数。因此 \( s(k) \) 应满足：\( p(k) = q(k) s(k+1) - r(k) s(k) \).
+
+记 \( Q(k) = q(k) - r(k) = -2 \ , \ R(k) = q(k) + r(k) = 2k \)，所以 \( 2k = Q(k) (s(k+1) + s(k)) + R(k) (s(k+1) - s(k)) \)。将 \( s(k) \) 的次数表示为 \( d \)，因为 \( \deg{(Q)} < \deg{(R)} \) 并且 \( \frac{-2 \times (-2)}{2} < 1 \)，所以 \( d = \deg{(p)} - \deg{(R)} + 1 = 1 \)
+
+不妨设 \( s(k) = ak + b \)，代入相应表达式，计算可得：\( s(k) = -k + \frac{1}{2} \)，因此：\( T(k) = \frac{r(k) s(k) t(k)}{p(k)} = \frac{1-2k}{2k(k-1)} \)，所以 \( \sum \delta k / (k^2 - 1) = \frac{1-2k}{2k(k-1)} + C \)
+
+\begin{problem}{5.34}{1}
+  证明，部分超几何和式总可以表示成通常的超几何级数的极限：
+  \[
+    \sum_{k \le c} F
+    \left( \left.
+      \begin{array}{cccc}
+        a_1, \cdots, a_m \\
+        b_1, \cdots, b_n
+    \end{array} \right|{z} \right)_k = \lim_{\varepsilon \to 0} F
+    \left( \left.
+      \begin{array}{cccc}
+        -c, a_1, \cdots, a_m \\
+        \varepsilon - c, b_1, \cdots, b_n
+    \end{array} \right|{z} \right)
+  \]
+  这里 \( c \) 是一个非负整数。利用这个思想来计算 \( \sum_{k \le m} \binom{n}{k} (-1)^k \).
+\end{problem}
+
+证明：
+\[
+  \lim_{\varepsilon \to 0} F
+  \left( \left.
+    \begin{array}{cccc}
+      -c, a_1, \cdots, a_m \\
+      \varepsilon - c, b_1, \cdots, b_n
+  \end{array} \right|{z} \right) =
+  \lim_{\varepsilon \to 0} \sum_{k \ge 0} \frac{(-c)^{\overline{k}} a_1^{\overline{k}} \cdots a_m^{\overline{k}} z^k}{(\varepsilon - c)^{\overline{k}} b_1^{\overline{k}} \cdots b_n^{\overline{k}} k!}
+\]
+其中，若 \( k > c \) 则 \( (-c)^{\overline{k}} = 0 \)，对应项为零。若 \( k \le c \) 又 \( \lim_{\varepsilon \to 0} \frac{(-c)^{\overline{k}}}{(\varepsilon - c)^{\overline{k}}} = 1 \)，因此：
+\[
+  \lim_{\varepsilon \to 0} F
+  \left( \left.
+    \begin{array}{cccc}
+      -c, a_1, \cdots, a_m \\
+      \varepsilon - c, b_1, \cdots, b_n
+  \end{array} \right|{z} \right) =
+  \sum_{k \le c} F
+  \left( \left.
+    \begin{array}{cccc}
+      a_1, \cdots, a_m \\
+      b_1, \cdots, b_n
+  \end{array} \right|{z} \right)_k
+\]
+
+应用：
+\begin{gather*}
+  \sum_{k \le m} \binom{n}{k} (-1)^k \ \text{中} \ t_k = \binom{n}{k} (-1)^k \\
+  \Rightarrow \frac{t_{k+1}}{t_k} = \frac{k-n}{k+1} \\
+  \Rightarrow \sum_{k \le m} \binom{n}{k} (-1)^k = \lim_{\varepsilon \to 0} F
+  \left( \left.
+    \begin{array}{cccc}
+      -m, -n \\
+      \varepsilon - m
+  \end{array} \right|{1} \right)
+\end{gather*}
+由范德蒙德卷积的超几何形式：
+\(
+  F
+  \left( \left.
+    \begin{array}{cccc}
+      a, -n \\
+      c
+  \end{array} \right|{1} \right) = \frac{(c-a)^{\overline{n}}}{c^{\overline{n}}}
+\)，整数 \( n \ge 0 \)
+
+所以
+\(
+  \lim_{\varepsilon \to 0} F
+  \left( \left.
+    \begin{array}{cccc}
+      -m, -n \\
+      \varepsilon - m
+  \end{array} \right|{1} \right) = \lim_{\varepsilon \to 0} \frac{(\varepsilon - m + n)^{\overline{m}}}{(\varepsilon - m)^{\overline{m}}}
+\)，\( m \) 是一个非负整数
+
+因此：\( \sum_{k \le m} \binom{n}{k} (-1)^k = \binom{m-n}{m} \)
+
+\subsection{作业题}
+
+\begin{problem}{5.35}{2}
+  如果没有上下文，记号 \( \sum_{k \le n} \binom{n}{k} 2^{k-n} \) 是含混不清的，在下列情况下计算它：
+  \begin{enumerate}
+    \item [a] 将它视为关于 \( k \) 的和式
+    \item [b] 将它视为关于 \( n \) 的和式
+  \end{enumerate}
+\end{problem}
+
+a. 若 \( n < 0 \)，则 \( k \le n < 0 \)，所以 \( \binom{n}{k} = 0 \)，和式为零
+
+若 \( n \ge 0 \)：
+\[
+  \sum_{k \le n} \binom{n}{k} 2^{k-n} = \sum_{k \le n} \binom{n}{k} 1^k (2^{-1})^{n-k} = (1+\frac{1}{2})^n
+\]
+
+综上：\( \sum_{k \le n} \binom{n}{k} 2^{k-n} = (\frac{3}{2})^n [n \ge 0] \)
+
+b. 若 \( k < 0 \)，则 \( \binom{n}{k} = 0 \)，所以和式为零
+
+若 \( k \ge 0 \)：
+\begin{align*}
+  \sum_{k \le n} \binom{n}{k} 2^{k-n} &= \sum_{n+k \ge k} \binom{n+k}{k} 2^{-n} \\
+  &= \sum_{n \ge 0} \binom{n+k}{n} 2^{-n} \\
+  &= \sum_{n \ge 0} \binom{-k-1}{n} (-1)^n 2^{-n} \\
+  &= (1-\frac{1}{2})^{-k-1}
+\end{align*}
+
+综上：\( \sum_{k \le n} \binom{n}{k} 2^{k-n} = 2^{k+1} [k \ge 0] \)
+
+\begin{problem}{5.36}{2}
+  设 \( p^k \) 是素数 \( p \) 的整除 \( \binom{m+n}{m} \) 的最大幂，其中 \( m \) 和 \( n \) 是非负整数。证明：\( k \) 是在 \( p \) 进制系统中将 \( m \) 加到 \( n \) 上时所产生的进位的个数。\textit{提示：}习题~\ref{problem:4.24}~对这个问题有帮助。
+\end{problem}
+
+记 \( \nu_p (n) \) 是 \( n \) 用 \( p \) 进制表示时各位数字的和，\( \varepsilon_p(n!) \) 是能整除 \( n! \) 的 \( p \) 的最大幂。
+
+由~\ref{problem:4.24}~知：\( \varepsilon_p (n!)= \frac{n - \nu_p (n)}{p-1} \)。若 \( p^k \) 是素数 \( p \) 的整除 \( \binom{m+n}{m} \) 的最大幂，且 \( m \) 和 \( n \) 是非负整数。因此：\( p^k \setminus \frac{(m+n)!}{m! \ n!} \)，所以 \( p^k \ m! \ n! \setminus (m+n)! \) 和 \( k + \varepsilon_p{(m!)} + \varepsilon_p{(n!)} \le \varepsilon_p{(m+n)!} \)，因此 \( k \) 是满足 \( \le \frac{\nu_p{(m)} + \nu_p{(n)} - \nu_p{(m+n)}}{p-1} \) 的最大值。
+
+又 \( \nu_p{(m+n)} = \nu_p{(m)} + \nu_p{(n)} - (p-1) \times \ \text{进位个数} \)，因为每有一个进位，在当前位 \( -p \)，而在下一位 \( +1 \)，总和为 \( (1-p) \)，所以 \( k \) 是在 \( p \) 进制系统中将 \( m \) 加到 \( n \) 上时所产生的进位的个数。
+
+\begin{problem}{5.37}{2}
+  证明对阶乘幂有一个与二项式定理类似的结果成立。也就是说，证明恒等式：
+  \begin{align*}
+    (x+y)^{\underline{n}} &= \sum_k \binom{n}{k} x^{\underline{k}} y^{\underline{n-k}} \\
+    (x+y)^{\overline{n}} &= \sum_k \binom{n}{k} x^{\overline{k}} y^{\overline{n-k}}
+  \end{align*}
+  对所有的非负整数 \( n \) 成立。
+\end{problem}
+
+在第一个等式两边同时除以 \( n! \)：
+\begin{align*}
+  \frac{(x+y)^{\underline{n}}}{n!} &= \frac{1}{n!} \sum_k \binom{n}{k} x^{\underline{k}} y^{\underline{n-k}} \\
+  \Rightarrow
+  \binom{x+y}{n} &= \sum_k \binom{x}{k} \binom{y}{n-k} \\
+  &= \binom{x+y}{n}
+\end{align*}
+
+在第二个等式两边同时乘以 \( (-1)^n \)，并取 \( x, y \) 为各自的相反数：
+\begin{align*}
+  (-1)^n (-x-y)^{\overline{n}} &=
+  \sum_k \binom{n}{k} (-x)^{\overline{k}} (-y)^{\overline{n-k}} (-1)^{k} (-1)^{n-k} \\
+  \Rightarrow
+  (x+y)^{\underline{n}} &= \sum_k \binom{n}{k} x^{\underline{k}} y^{\underline{n-k}}
+\end{align*}
+
+\begin{problem}{5.38}{2}
+  证明：所有的非负整数 \( n \) 都可以用唯一的方式表示成 \( n = \binom{a}{1} + \binom{b}{2} + \binom{c}{3} \)，其中 \( a, b \) 和 \( c \) 是满足 \( 0 \le a < b < c \) 的整数。（这称为组合数系）
+\end{problem}
+
+构造法证明：取尽可能大的 \( c \) 使得：\( \binom{c}{3} \le n < \binom{c+1}{3} \)，再用 \( n - \binom{c}{3} \) 代替 \( n \) 继续下去，这样只有唯一方式表示 \( n \)
+
+下证这种取法保证 \( 0 \le a < b < c \)：
+
+不妨设 \( b \ge c \)：因为 \( \binom{c}{3} \le n < \binom{c+1}{3} = \binom{c}{3} + \binom{c}{2} \)，所以 \( 0 \le n - \binom{c}{3} < \binom{c}{2} \)，又因为 \( b \) 的取法保证了 \( \binom{b}{2} < \binom{b+1}{2} \)，且 \( b \ge c \)，因此 \( \binom{b}{2} \ge \binom{c}{2} \)，这与 \( \binom{b}{2} \le n - \binom{c}{3} \) 矛盾。
+
+因此 \( b < c \)，同理可证 \( a < b \)。
+
+因为 \( n \) 是非负整数，并且每一次替换都保证了 \( n \) 的这一性质，因此 \( a \ge 0 \).
+
+\begin{problem}{5.39}{2}
+  证明：如果 \( xy = ax + by \)，那么对所有 \( n > 0 \) 都有：
+  \[
+    x^n y^n = \sum_{k=1}^n \binom{2n-1-k}{n-1} (a^n b^{n-k} x^k + a^{n-k} b^n y^k)
+  \]
+  对更加一般的乘积 \( x^m y^n \) 求一个类似的公式。（例如，当 \( x=1/(z-c) \) 以及 \( y=1/(z-d) \) 时，这些公式给出有用的部分分式展开）
+\end{problem}
+
+直接证明更一般的 \( x^m y^n \) 满足：
+\[
+  x^m y^n = \sum_{k=1}^m \binom{m+n-1-k}{n-1} a^n b^{m-k} x^k + \sum_{k=1}^n \binom{m+n-1-k}{m-1} a^{n-k} b^m y^k
+\]
+整数 \( m, n > 0 \)
+
+数学归纳法：
+\begin{enumerate}
+  \item[1.] 当 \( m+n = 2 \) 时，\( x^1 y^1 = ax + by \)，原式成立。
+  \item[2.] 假设 \( m+n \) 时，原式成立。
+  \item[3.] 则当 \( m+n+1 \) 时：（由 \( x, y \) 的对称性，不妨设 \( m \) 为 \( m+1 \)）
+    \begin{align*}
+      x^{m+1} y^n &= \sum_{k=1}^m \binom{m+n-1-k}{n-1} a^n b^{m-k} x^{k+1} \\
+      &\phantom{=} + \sum_{k=1}^n \binom{m+n-1-k}{m-1} a^{n-k} b^m y^k x \\
+      &= \sum_{k=1}^m \binom{m+n-1-k}{n-1} a^n b^{m-k} x^{k+1} \\
+      &\phantom{=} + \sum_{k=1}^n \binom{m+n-1-k}{m-1} a^{n-k} b^m ( \ a^k x + \sum_{j=1}^k (a^{k-j} b y^j) \ ) \\
+      &= \sum_{k=1}^m \binom{m+n-1-k}{n-1} a^n b^{m-k} x^{k+1} + \sum_{k=1}^n \binom{m+n-1-k}{m-1} a^n b^m x \\
+      &\phantom{=} + \sum_{k=1}^n \sum_{j=1}^k \binom{m+n-1-k}{m-1} a^{n-j} b^{m+1} y^j
+    \end{align*}
+
+    可以看到，二项式 \( \binom{m+n-1-k}{m-1} \) 多次出现，下面我们研究一下它的封闭形式：
+
+    令 \( t(k) = \binom{m+n-1-k}{m-1} \)，则 \( \frac{t(k+1)}{t(k)} = \frac{\binom{m+n-2-k}{m-1}}{\binom{m+n-1-k}{m-1}} = \frac{k-n}{k-m-n+1} \)，可以取 \( p(k) = 1 \ , \ q(k) = k-n \ , \ r(k) = k-m-n \)，则 \( s(k) \) 应满足：\( 1 = (k - n) s(k+1) - (k-m-n) s(k) \)，另 \( Q(k) = q(k) - r(k) = m \ ; \ R(k) = q(k) + r(k) = 2k - m -2n \)，则 \( d = \deg{(p)} - \deg{(R)} + 1 = 0 \)，可设 \( s(k) = c \)，有 \( 1 = (k-n)c - (k-m-n)c \) 和 \( s(k) = c = \frac{1}{m} \)，因此：\( T(k) = \frac{(k-m-n) \frac{1}{m} \binom{m+n-1-k}{m-1}}{1} = (-1) \binom{m+n-k}{m} \)，所以：\( \sum_{k=1}^n \binom{m+n-1-k}{m-1} = (-1) \left. \binom{m+n-k}{m} \right|_1^{n+1} \)
+
+    现在可以继续上面的证明：
+    \begin{align*}
+      x^{m+1} y^n &= \sum_{k=1}^m \binom{m+n-1-k}{n-1} a^n b^{m-k} x^{k+1} + \binom{m+n-1}{n-1} a^n b^m x \\
+      &\phantom{=} + \sum_{k=1}^n \sum_{j=1}^k \binom{m+n-1-k}{m-1} a^{n-j} b^{m+1} y^j \\
+      &= \sum_{k=1}^{m+1} \binom{m+n-k}{n-1} a^n b^{m+1-k} x^k + \sum_{k=1}^n \sum_{j=1}^k \binom{m+n-1-k}{m-1} a^{n-j} b^{m+1} y^j
+    \end{align*}
+
+    我们需要证明的是:
+    \[
+      x^{m+1} y^n = \sum_{k=1}^{m+1} \binom{m+n-k}{n-1} a^n b^{m+1-k} x^k + \sum_{k=1}^n \binom{m+n-k}{m} a^{n-k} b^{m+1} y^k
+    \]
+    已经证明了 \( x \) 的系数是相等的，下面证明 \( y \) 的系数也是相等的：
+    \begin{align*}
+      & \quad [y^p] \left( \sum_{k=1}^n \sum_{j=1}^k \binom{m+n-1-k}{m-1} a^{n-j} b^{m+1} y^j \right) \\
+      &= \sum_{k=p}^n \binom{m+n-1-k}{m-1} a^{n-p} b^{m+1} \\
+      &= (-1) \left. \binom{m+n-k}{m} \right|_p^{n+1} a^{n-p} b^{m+1} \\
+      &= \binom{m+n-p}{m} a^{n-p} b^{m+1} \\
+      &= [y^p] \left( \sum_{k=1}^n \binom{m+n-k}{m} a^{n-k} b^{m+1} y^k \right)
+    \end{align*}
+
+    因此，当 \( m+n+1 \) 时，原式也成立。
+\end{enumerate}
+
+综上，原式成立。
+
+\hfill \( \square \)
+
+\begin{problem}{5.40}{2}
+  求出
+  \[
+    \sum_{j = 1}^m (-1)^{j+1} \binom{r}{j} \sum_{k=1}^n \binom{-j+rk+s}{m-j} \ , \ \text{整数} \ m, n \ge 0
+  \]
+  的封闭形式。
+\end{problem}
+
+原式等于
+\begin{align*}
+  &\phantom{=} \sum_{j = 1}^m (-1)^{j+1} \binom{r}{j} \sum_{k=1}^n \binom{m-rk-s-1}{m-j} (-1)^{m-j} \\
+  &= (-1)^{m+1} \sum_{k=1}^n \sum_{j=1}^m \binom{r}{j} \binom{m-rk-s-1}{m-j} \\
+  &= (-1)^{m+1} \sum_{k=1}^n \left( \binom{m-rk-s+r-1}{m} - \binom{m-rk-s-1}{m} \right) \\
+  &\phantom{=} \text{（运用范德蒙德卷积，注意下标）} \\
+  &= (-1)^{m} \sum_{k=1}^n \left( \binom{m-rk-s-1}{m} - \binom{m-r(k-1)-s-1}{m} \right) \\
+  &= (-1)^m \left(\binom{m-rn-s-1}{m} - \binom{m-s-1}{m} \right) \ \text{（消去法）} \\
+  &= \binom{rn+s}{m} - \binom{s}{m}
+\end{align*}
+
+\begin{problem}{5.41}{2}
+  当 \( n \) 是一个非负整数时，计算 \( \sum_k \binom{n}{k} k! / (n+1+k)! \).
+\end{problem}
+
+\begin{align*}
+  \sum_k \frac{\binom{n}{k} k!}{(n+1+k)!} &= \sum_{k=0}^n \frac{n!}{(n-k)! \ (n+k+1)!} \\
+  &= \frac{n!}{(2n+1)!} \sum_{k=0}^n \binom{2n+1}{n-k} \\
+  &= \frac{n!}{(2n+1)!} \sum_{k=0}^n \binom{2n+1}{k}
+\end{align*}
+\begin{gather*}
+  \because \sum_{k=0}^n \binom{2n+1}{k} = \frac{1}{2} \sum_k \binom{2n+1}{k} = \frac{1}{2} \cdot 2^{2n+1} \\
+  \therefore \sum_k \frac{\binom{n}{k} k!}{(n+1+k)!} = \frac{2^{2n} n!}{(2n+1)!}
+\end{gather*}
+
+\begin{problem}{5.42}{2}
+  求不定和式 \( \sum \left( (-1)^x / \binom{n}{x} \right) \delta x \)，并利用它在 \( 0 \le m \le n \) 时将和式 \( \sum_{k=0}^m (-1)^k / \binom{n}{k} \) 表示成封闭形式。
+\end{problem}
+
+用 \( \text{Gosper} \) 方法计算：取 \( p(k)=1 \ , \ q(k) = -(k+1) \ , \ r(k) = n-k+1 \)
+\begin{gather*}
+  Q(k) = q(k) - r(k) = -n-2 \\ R(k) = q(k) + r(k) = -2k+n \\
+  \therefore d = \deg{(p)} - \deg{(R)} + 1 = 0 \\
+  \Rightarrow s(k) = \frac{-1}{n+2} \ , \ T(k) = \frac{(-1)^{k+1} (n+1)}{(n+2) \binom{n+1}{k}} \\
+  \therefore \sum \left( (-1)^x / \binom{n}{x} \right) \delta x = \frac{(-1)^{x+1} (n+1)}{(n+2) \binom{n+1}{x}} + C
+\end{gather*}
+
+当 \( 0 \le m \le n \) 时：
+\begin{align*}
+  & \quad \sum_{k=0}^m \frac{(-1)^k}{\binom{n}{k}} \\
+  &= \left. \frac{(-1)^{x+1} (n+1)}{(n+2) \binom{n+1}{x}} \right|_0^{m+1} \\
+  &= \frac{n+1}{n+2} + \frac{(-1)^m (n+1)}{(n+2) \binom{n+1}{m+1}}
+\end{align*}
+
+\begin{problem}{5.43}{2}
+  证明三重二项恒等式：
+  \[
+    \sum_k \binom{m-r+s}{k} \binom{n+r-s}{n-k} \binom{r+k}{m+n} = \binom{r}{m} \binom{s}{n} \ , \ m,n \ \text{是整数}
+  \]
+  \textit{提示：}首先用 \( \sum_j \binom{r}{m+n-j} \binom{k}{j} \) 代替 \( \binom{r+k}{m+n} \)
+\end{problem}
+
+证明：
+\begin{align*}
+  &\phantom{=} \sum_k \binom{m-r+s}{k} \binom{n+r-s}{n-k} \binom{r+k}{m+n} \\
+  &= \sum_k \binom{m-r+s}{k} \binom{n+r-s}{n-k} \sum_j \binom{r}{m+n-j} \binom{k}{j} \\
+  &= \sum_k \sum_j \binom{n+r-s}{n-k} \binom{r}{m+n-j} \binom{m-r+s}{j} \binom{m-r+s-j}{k-j} \\
+  &= \sum_j \binom{m-r+s}{j} \binom{r}{m+n-j} \binom{m+n-j}{m} \\
+  &= \sum_j \binom{m-r+s}{j} \binom{r}{m} \binom{r-m}{n-j} \\
+  &= \binom{r}{m} \binom{s}{n}
+\end{align*}
+\hfill \( \square \)
+
+\begin{problem}{5.45}{2}
+  求出 \( \sum_{k \le n} \binom{2k}{k} 4^{-k} \) 的封闭形式。
+\end{problem}
+
+由公式：\( \binom{n-\frac{1}{2}}{n} = \binom{2n}{n} / 2^{2n} \)，所以 \( \sum_{k \le n} \binom{2k}{k} 4^{-k} = \sum_{k \le n} 4^k \binom{k - \frac{1}{2}}{k} 4^{-k} \)
+
+由公式：\( \sum_{k \le n} \binom{r+k}{k} = \binom{r+n+1}{n} \)，所以 \( \sum_{k \le n} \binom{2k}{k} 4^{-k} = \binom{n + \frac{1}{2}}{n} \)
+
+\begin{problem}{5.50}{2}
+  用比较方程两边 \( z^n \) 的系数的方法来证明普法夫反射定律：
+  \[
+    \frac{1}{(1-z)^a} F
+    \left( \left.
+      \begin{array}{cccc}
+        a, b \\
+        c
+    \end{array} \right|{\frac{-z}{1-z}} \right)
+    =
+    F
+    \left( \left.
+      \begin{array}{cccc}
+        a, c-b \\
+        c
+    \end{array} \right|{z} \right)
+  \]
+\end{problem}
+
+证明：
+\begin{align*}
+  \frac{1}{(1-z)^a} F
+  \left( \left.
+    \begin{array}{cccc}
+      a, b \\
+      c
+  \end{array} \right|{\frac{-z}{1-z}} \right)
+  &= \sum_{k \ge 0} \frac{a^{\overline{k}} b^{\overline{k}} (-z)^k}{c^{\overline{k}} k!} \frac{1}{(1-z)^{k+a}} \\
+  &= \sum_{k \ge 0} \frac{a^{\overline{k}} b^{\overline{k}} (-z)^k}{c^{\overline{k}} k!} \sum_{m \ge 0} \binom{k+a+m-1}{m} z^m
+\end{align*}
+
+对任意 \( k \)，当 \( m = n-k \) 时可得此时 \( z^n \) 的系数。
+
+所以：
+\begin{align*}
+  &\phantom{=}
+  [z^{n}](\frac{1}{(1-z)^a} F
+    \left( \left.
+      \begin{array}{cccc}
+        a, b \\
+        c
+  \end{array} \right|{\frac{-z}{1-z}} \right)) \\
+  &= \sum_{k \ge 0} \frac{a^{\overline{k}} b^{\overline{k}} (-1)^k}{c^{\overline{k}} k!} \binom{a+n-1}{n-k} \\
+  &= \sum_{k \ge 0} \frac{a^{\overline{k}} b^{\overline{k}} (-1)^k}{c^{\overline{k}} k!} \frac{(a+n-1)^{\underline{n-k}}}{(n-k)!} \\
+  &= \frac{a^{\overline{n}}}{n!} \sum_{k \ge 0} \frac{n! \ b^{\overline{k}} (-1)^k}{c^{\overline{k}} (n-k)! \ k!} \\
+  &= \frac{a^{\overline{n}}}{n!} \sum_{k \ge 0} \frac{b^{\overline{k}} (-n)^{\overline{k}}}{c^{\overline{k}} \ k!} \\
+  &= \frac{a^{\overline{n}}}{n!} F
+  \left( \left.
+    \begin{array}{cccc}
+      b, -n \\
+      c
+  \end{array} \right|{1} \right) \\
+  &= \frac{a^{\overline{n}}}{n!} \frac{(c-b)^{\overline{n}}}{c^{\overline{n}}} \\
+  &= [z^n] F
+  \left( \left.
+    \begin{array}{cccc}
+      a, c-b \\
+      c
+  \end{array} \right|{z} \right)
+\end{align*}
+即证普法夫反射定律。
+
+\hfill \( \square \)
+
+\subsection{考试题}
+
+\begin{problem}{5.60}{3}
+  当 \( m \) 和 \( n \) 两者都很大时，利用斯特林近似来估计 \( \binom{m+n}{n} \)。当 \( m=n \) 时，你的公式转化成了什么？
+\end{problem}
+
+\begin{align*}
+  \binom{m+n}{n} &= \frac{(m+n)!}{n! \cdot m!} \\[5pt]
+  &\approx \frac{\sqrt{2 \pi (m+n)} (\frac{m+n}{e})^{m+n}}{(\sqrt{2 \pi n} (\frac{n}{e})^{n}) \cdot (\sqrt{2 \pi m} (\frac{m}{e})^{m})} \\[5pt]
+  &= \sqrt{\frac{1}{2 \pi} ( \frac{1}{m} + \frac{1}{n})} (1 + \frac{n}{m})^m (1 + \frac{m}{n})^n
+\end{align*}
+
+当 \( m=n \) 时：
+\[
+  \binom{2n}{n} \approx \frac{4^n}{\sqrt{\pi n}}
+\]
+
+\begin{problem}{5.65}{3}
+  证明：
+  \[
+    \sum_k \binom{n-1}{k} n^{-k} (k+1)! = n
+  \]
+\end{problem}
+
+\begin{align*}
+  & \ \text{要证：} \ \sum_k \binom{n-1}{k} n^{-k} (k+1)! = n \\
+  & \ \text{即证：} \ \sum_{k=0}^{n-1} \binom{n-1}{k} n^{n-k-1} (k+1)! = n^n \\
+  & \ \text{即证：} \ \sum_{n-k-1=0}^{n-1} \binom{n-1}{n-k-1} n^{k} (n-k)! = n^n \\
+  & \ \text{即证：} \ \sum_{k=0}^{n-1} \binom{n-1}{k} n^k (n-k)! = n^n \\
+  & \ \text{即证：} \ (n-1)! \sum_{k=0}^{n-1} \frac{n^k (n-k)!}{k! (n-k-1)!} = n^n
+\end{align*}
+
+下面用 \( \text{Gosper} \) 方法证明：记 \( t(k) = \frac{n^k \ (n-k)!}{k! \ (n-k-1)!} \)，则 \( \frac{t(k+1)}{t(k)} = \frac{n (k-n+1)}{(k-n) (k+1)} \)。可以取：\( p(k) = k-n \ , \ q(k) = n \ , \ r(k) = k \)，则 \( s(k) \) 应满足：\( k-n = n s(k+1) - k s(k) \)，故 \( s(k) = -1 \)，因此：\( T(k) = \frac{k \ n^k}{k!} \)，有：
+\begin{gather*}
+  \sum_{k=0}^{n-1} \frac{n^k (n-k)!}{k! (n-k-1)!} = \left. \frac{k \ n^k}{k!} \right|_0^n = \frac{n^{n+1}}{n!} \\
+  \Rightarrow (n-1)! \sum_{k=0}^{n-1} \frac{n^k (n-k)!}{k! (n-k-1)!} = n^n
+\end{gather*}
+\hfill \( \square \)
+
+\subsection{附加题}
+
+\begin{problem}{5.98}{4}
+  对于和式 \( S_n = \sum_k \binom{n}{2k} \)，\( \text{Gosper-Zeilberger} \) 方法给出什么样的递归式？
+\end{problem}
+
+令 \( \hat{t}(n,k) = \beta_0(n) \ t(n,k) + \beta_1(n) \ t(n+1,k) \)，因为 \( \frac{t(n+1,k)}{t(n,k)} = \frac{n+1}{n-2k+1} \)，所以 \( \hat{t}(n,k) = p(n,k) \frac{t(n,k)}{n-2k+1} \)，其中 \( p(n,k) =  (n-2k+1) \beta_0(n) + (n+1) \beta_1(n) \)
+
+记 \( \overline{t}(n,k) = \frac{\hat{t}(n,k)}{p(n,k)} \ , \quad \overline{p}(n,k) = \frac{\hat{p}(n,k)}{p(n,k)} \)，对于：\( \frac{\overline{t}(n,k+1)}{\overline{t}(n,k)} = \frac{\overline{p}(n,k+1)}{\overline{p}(n,k)} \frac{q(n,k)}{r(n,k+1)} \)，从 \( \overline{p}(n,k) = 1 \) 出发：
+\begin{gather*}
+  \because \overline{t}(n,k) = \frac{t(n,k)}{n-2k+1} \\
+  \therefore \frac{\overline{t}(n,k+1)}{\overline{t}(n,k)} = \frac{(n-2k)(n-2k+1)}{(2k+1)(2k+2)} \\
+  \Rightarrow q(n,k) = (n-2k)(n-2k+1) \ , \quad r(n,k) = (2k-1)(2k) \\
+  d_Q = 1 \ , \quad d_R = 2 \\
+  \Rightarrow d = \deg{(\hat{p})} - d_R + 1 = 0 \\
+\end{gather*}
+
+不妨设 \( s(n,k) = s \)，则 \( s \) 应满足：\( \hat{p}(n,k) = q(n,k)s - r(n,k)s \)，使 \( k \) 对应幂相等：
+\begin{gather*}
+  \begin{cases}
+    -2 \beta_0(n) = -4ns \\
+    (n+1) (\beta_0(n) + \beta_1(n)) = n(n+1)s
+  \end{cases} \\
+  \Rightarrow \beta_0(n) = 2ns \ , \ \beta_1(n) = -ns \\
+  \therefore \hat{t}(n,k) = (2ns) \ t(n,k) - ns \ t(n+1,k) \\
+  T(n,k) = r(n,k) \ s(n,k) \ \overline{t}(n,k) \\
+\end{gather*}
+而当 \( n \) 是任意一个给定的非负整数时，\( T(n,k) \) 仅对有限多个 \( k \) 的值不等于零，因此 \( T(n,k+1) - T(n,k) \) 对所有 \( k \) 的求和必定缩减为零，所以有
+\begin{gather*}
+  \sum_k (2ns)t(n,k) - (ns)t(n+1,k) = 0 \\
+  \Rightarrow 2n S_n - n S_{n+1} = 0
+\end{gather*}
+即：\( 2n S_n = n S_{n+1} \)
+
+\begin{problem}{5.99}{4}
+  假设 \( a \) 是一个非负整数，当 \( t(n,k) = (n+a+b+c+k)! / (n+k)! (c+k)! (b-k)! (a-k)! k! \) 时，利用 \( \text{Gosper-Zeilberger} \) 方法求出 \( \sum_k t(n,k) \) 的封闭形式。
+\end{problem}
+
+记 \( \sum_k t(n,k) = S_n \)：因为 \( \frac{t(n+1,k)}{t(n,k)} = \frac{n+a+b+c+k+1}{n+k+1} \)，所以 \( \hat{t}(n,k) = p(n,k) \frac{t(n,k)}{n+1+k} \)，其中 \( p(n,k) = (n+1+k) \ \beta_0(n) + (n+a+b+c+k+1) \ \beta_1(n) \)，所以 \( \overline{t}(n,k) = \frac{\hat{t}(n,k)}{p(n,k)} = \frac{t(n,k)}{n+1+k} \)，对于 \( \frac{\overline{t}(n,k+1)}{\overline{t}(n,k)} = \frac{\overline{p}(n,k+1)}{\overline{p}(n,k)} \frac{q(n,k)}{r(n,k+1)} \)，从 \( \overline{p}(n,k) = 1 \) 出发：
+\begin{gather*}
+  q(n,k) = (n+a+b+c+k+1)(a-k)(b-k) \\ r(n,k) = (n+k+1)(c+k)k \\
+  \Rightarrow Q(n,k) = q(n,k) - r(n,k) \ , \ R(n,k) = q(n,k) + r(n,k) \\
+  \therefore d = 0
+\end{gather*}
+
+不妨设 \( s(n,k) = s \)，则 \( s \) 应满足：\( (n+1+k) \ \beta_0(n) + (n+a+b+c+k+1) \ \beta_1(n) = (n+a+b+c+k+1)(a-k)(b-k) s - (n+k+1)(c+k)ks \)，计算得出：
+\begin{align*}
+  \beta_0(n) &= (n+1+a+b+c)(n+1+a+b) \\
+  \beta_1(n) &= -(n+1+a)(n+1+b) \ , \ s(n,k) = -1
+\end{align*}
+
+因此：\( \sum_k \beta_0(n) \ t(n,k) + \beta_1(n) \ t(n+1,k) = 0 \)，即：
+\[
+  S_{n+1} = \frac{(n+1+a+b+c)(n+1+a+b)}{(n+1+a)(n+1+b)} S_n
+\]
+
+下面用归纳法证明：
+\begin{align*}
+  &\phantom{=} \sum_k \frac{(a+b+c+n+k)!}{(a-k)! (b-k)! (c+k)! (n+k)! \ k!} \\
+  &= \frac{(a+b+c+n)! (a+b+c)! (a+b+n)!}{a! \ b! (a+c)! (a+n)! (b+c)! (b+n)!}
+\end{align*}
+
+\begin{enumerate}
+  \item[1.] 因为 \( a \) 是非负整数，所以基础情况从 \( n=-a \) 开始：
+    \[
+      S_{-a} = \sum_k t(-a,k) = \sum_k \frac{(b+c+k)!}{(k-a)! (c+k)! (b-k)! (a-k)! \ k!}
+    \]
+    因为 \( \frac{1}{z!} = \lim_{n \to \infty} \binom{n+z}{n} n^{-z} \)，所以仅当 \( z \) 是负整数时，取值为零，因此 \( S_{-a} = \frac{(b+c+a)!}{(c+a)! (b-a)! \ a!} \)（仅当 \( k = a \) 时，取值不为零），所以原命题成立。
+  \item[2.] 假设对于 \( n \)，命题成立。
+  \item[3.] 则对于 \( n+1 \)：
+    \begin{align*}
+      S_{n+1} &= \frac{(n+1+a+b+c)(n+1+a+b)}{(n+1+a)(n+1+b)} S_n \\
+      &= \frac{(n+1+a+b+c)(n+1+a+b)}{(n+1+a)(n+1+b)} \frac{(a+b+c+n)! (a+b+c)! (a+b+n)!}{a! \ b! (a+c)! (a+n)! (b+c)! (b+n)!} \\
+      &= \frac{(a+b+c+n+1)! (a+b+c)! (a+b+n+1)!}{a! \ b! (a+c)! (a+n+1)! (b+c)! (b+n+1)!}
+    \end{align*}
+    因此，对于 \( n+1 \)，命题也成立。
+\end{enumerate}
+
+综上，命题成立。（取 \( n \) 为 \( d \)，即证明了书中对应的公式）
+
+\hfill \( \square \)
+
+\begin{problem}{5.100}{4}
+  求出和式：
+  \[
+    S_n = \sum_{k=0}^n \frac{1}{\binom{n}{k}}
+  \]
+  的递归关系，并用这个递归关系求出 \( S_n \) 的另一个公式。
+\end{problem}
+
+\( t(n,k) = \frac{1}{\binom{n}{k}} = \frac{k! \ (n-k)!}{n!} \)，记 \( \hat{t}(n,k) = \beta_0(n) \ t(n,k) + \beta_1(n) \ t(n+1,k) \)，因为 \( \frac{t(n+1,k)}{t(n,k)} = \frac{n+1-k}{n+1} \)，所以 \( \hat{t}(n,k) = p(n,k) \frac{t(n,k)}{n+1} \)，其中 \( p(n,k) = (n+1) \beta_0(n) + (n+1-k) \beta_1 (n) \)
+
+记 \( \overline{t}(n,k) = \frac{\hat{t}(n,k)}{p(n,k)} \ , \ \overline{p}(n,k) = \frac{\hat{p}(n,k)}{p(n,k)} \)，对于 \( \frac{\overline{t}(n,k+1)}{\overline{t}(n,k)} = \frac{\overline{p}(n,k+1)}{\overline{p}(n,k)} \frac{q(n,k)}{r(n,k+1)} \)，因为 \( \overline{t}(n,k) = \frac{t(n,k)}{n+1} \)，所以 \( \frac{\overline{t}(n,k+1)}{\overline{t}(n,k)} = \frac{k+1}{n-k} \)，可以取：\( \overline{p}(n,k) = 1 \ , \ q(n,k) = k+1 \ , \ r(n,k) = n-k+1 \)，则 \( Q(n,k) = 2k-n \ , \ R(n,k) = n+2 \)，所以 \( d = \deg{(\hat{p})} - d_Q = 0 \)
+
+不妨设 \( s(n,k) = s \)，所以 \( (n+1)\beta_0(n) + (n+1-k) \beta_1(n) = (k+1) s - (n-k+1)s \)
+令 \( k \) 的对应幂相等：
+\begin{gather*}
+  \begin{cases}
+    -\beta_1(n) = 2s \\
+    (n+1) \left( \beta_0(n) + \beta_1(n) \right) = -ns
+  \end{cases} \\
+  \Rightarrow
+  \begin{cases}
+    \beta_1(n) = -2s \\
+    \beta_0(n) = \frac{n+2}{n+1}s
+  \end{cases} \\
+  \therefore T(n,k) = r(n,k) \ s(n,k) \ \overline{t}(n,k) = \frac{s}{\binom{n+1}{k}} \\
+  \therefore \hat{t} (n,k) = \frac{n+2}{n+1} s t(n,k) - 2s t(n+1,k) = T(n,k+1) - T(n,k)
+\end{gather*}
+
+对 \( 0 \le k \le n \) 求和：\( s \frac{n+2}{n+1} S_n - 2s(S_{n+1} - t(n+1,n+1)) = T(n,n+1) - T(n,0) \)，所以 \( \frac{n+2}{n+1} S_n - 2 S_{n+1} + 2 = 0 \)
+
+运用求和因子法~\ref{problem:2.19}：
+\[
+  S_n = \frac{(n+1)}{2^n} \sum_{k=0}^n \frac{2^k}{k+1}
+\]

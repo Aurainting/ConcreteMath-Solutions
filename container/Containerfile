@@ -1,0 +1,33 @@
+FROM docker.io/archlinux:latest
+
+LABEL description="A Modern Chinese LaTeX Environment Based on Arch Linux and TeX Live"
+
+# Mirror & Update
+RUN pacman-key --init && \
+    pacman-key --populate archlinux && \
+    echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist && \
+    pacman -Syu --noconfirm && \
+    echo -e '\n[archlinuxcn]\nServer = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch' >> /etc/pacman.conf && \
+    pacman -Sy archlinuxcn-keyring --noconfirm
+
+# Dependencies
+RUN pacman -S --noconfirm \
+        texlive-basic \
+        texlive-bibtexextra \
+        texlive-bin \
+        texlive-binextra \
+        texlive-formatsextra \
+        texlive-langchinese \
+        texlive-latex \
+        texlive-latexextra \
+        texlive-latexrecommended \
+        texlive-mathscience \
+        texlive-fontsextra \
+        texlive-fontutils \
+        texlive-science \
+        texlive-xetex \
+        noto-fonts-cjk \
+        ghostscript \
+        biber \
+        git && \
+    pacman -Scc --noconfirm

@@ -1,0 +1,71 @@
+% Initial settings, new commands and redefinition of existing commands
+\renewcommand{\title}{《具体数学》习题解答}
+\renewcommand{\author}{李洪涛}
+\renewcommand{\date}{\DTMdate{2021-05-01}}
+
+% Definition of ToC title and figures and tables caption
+\renewcommand{\contentsname}{目录}
+\renewcommand{\tablename}{\bfseries 表格}
+\renewcommand{\figurename}{\bfseries 图片}
+\renewcommand{\thefootnote}{\textcolor{grayblack}{\arabic{footnote}}}
+
+\color{grayblack}  % Document text color
+
+\newcommand{\difficulty}[1]{
+  \ifcase#1\relax
+  \or $\bigstar$
+  \or $\bigstar\bigstar$
+  \or $\bigstar\bigstar\bigstar$
+  \or $\bigstar\bigstar\bigstar\bigstar$
+  \or $\bigstar\bigstar\bigstar\bigstar\bigstar$
+  \else ?
+  \fi
+}
+
+\newtcolorbox{problem}[2]{
+  enhanced,
+  breakable,
+  boxrule=0pt,
+  frame hidden,
+  colback=bgCyan,
+  borderline north={1.5pt}{0pt}{boxCyan},
+  attach boxed title to top left={
+    xshift=0mm,
+    yshift=-1.5pt
+  },
+  boxed title style={
+    empty,
+    boxsep=2pt,
+    left=6pt,
+    right=15pt,
+    top=2pt,
+    bottom=2pt
+  },
+  underlay boxed title={
+    \fill[boxCyan]
+    (title.south west) --
+    (title.north west) --
+    (title.north east) --
+    ([xshift=10pt]title.south east) --
+    cycle;
+  },
+  fonttitle=\bfseries\color{white},
+  title={题目~#1 \hspace{10pt} 难度：\difficulty{#2}},
+  top=12pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt
+}
+
+% Set label
+\makeatletter
+\let\oldproblem\problem
+\let\endoldproblem\endproblem
+\renewenvironment{problem}[2]{
+  \begin{oldproblem}{#1}{#2}
+    \def\@currentlabel{#1}%
+    \phantomsection\label{problem:#1}%
+  }{
+  \end{oldproblem}
+}
+\makeatother

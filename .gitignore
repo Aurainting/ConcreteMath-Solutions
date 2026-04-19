@@ -1,0 +1,48 @@
+# Build directories
+build/*
+!build/.gitkeep
+
+# LaTeX intermediate files
+*.aux
+*.bbl
+*.blg
+*.brf
+*.bcf
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.nav
+*.snm
+*.vrb
+*.run.xml
+*.synctex.gz
+
+# PDF and other outputs (optional, uncomment if you don't want to track them)
+/*.pdf
+*.dvi
+*.ps
+
+# Backup files created by editors
+*~
+*.bak
+*.backup
+*.swp
+*.swo
+
+# MacOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
+
+# VSCode
+.vscode/*
+!.vscode/settings.json

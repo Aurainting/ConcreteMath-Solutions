@@ -1,0 +1,62 @@
+\documentclass[a4paper,12pt]{article}
+% Load all packages and settings in the preamble
+\input{settings/packages}
+
+\begin{document}
+
+% Load initial settings for the document
+\input{settings/initial}
+
+% Cover page
+\input{sections/00_cover_page}
+
+\newpage
+
+\pagenumbering{roman}
+
+\tableofcontents
+
+\newpage
+
+% Preface
+\section*{序言}
+
+谨此纪念我的大学时光，一段自在探索、处处是新奇的旅程。
+
+\vfill
+
+\begin{flushright}
+  李洪涛 \\
+  2026 年 4 月 19 日 \\
+  中国北京
+\end{flushright}
+
+\clearpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% Sections
+\input{sections/01_recurrent_problems}
+\clearpage
+\input{sections/02_sums}
+\clearpage
+\input{sections/03_integer_functions}
+\clearpage
+\input{sections/04_number_theory}
+\clearpage
+\input{sections/05_binomial_coefficients}
+\clearpage
+\input{sections/06_special_numbers}
+\clearpage
+\input{sections/07_generating_functions}
+\clearpage
+\input{sections/08_discrete_probability}
+\clearpage
+\input{sections/09_asymptotics}
+\clearpage
+
+% Bibliography
+\printbibliography[heading=bibintoc,title={参考文献}]
+
+\end{document}

@@ -1,0 +1,483 @@
+\section{习题二}
+
+\subsection{热身题}
+
+\begin{problem}{2.1}{1}
+  记号 \( \sum\limits_{k=4}^0 q_k \) 的含义是什么？
+\end{problem}
+
+\[
+  \sum\limits_{k=4}^0 q_k = q_4 + q_3 + q_2 + q_1 + q_0
+\]
+
+\begin{problem}{2.2}{1}
+  化简表达式：\( x([x>0]-[x<0]) \).
+\end{problem}
+
+\begin{gather*}
+  \because [x > 0] =
+  \begin{cases}
+    1, & x > 0 \\
+    0, & x \leq 0
+  \end{cases} \\
+  [x < 0] =
+  \begin{cases}
+    1, & x < 0 \\
+    0, & x \geq 0
+  \end{cases} \\
+  \therefore x([x > 0] - [x < 0]) =
+  \begin{cases}
+    x, & x > 0 \\
+    0, & x = 0 = |x| \\
+    -x, & x < 0
+  \end{cases}
+\end{gather*}
+
+\begin{problem}{2.3}{1}
+  将和式
+  \[
+    \sum_{0 \leq k \leq 5} a_k \ \text{与} \ \sum_{0 \leq k^2 \leq 5} a_{k^2}
+  \]
+  完全展开。
+\end{problem}
+
+\[
+  \sum_{0 \leq k \leq 5} a_k = a_1 + a_2 + a_3 + a_4 + a_5
+\]
+与
+\begin{gather*}
+  \sum_{0 \leq k^2 \leq 5} a_{k^2} = a_4 + a_1 + a_0 + a_1 + a_4 \\
+  k = \{-2, -1, 0, 1, 2\}
+\end{gather*}
+
+\begin{problem}{2.4}{1}
+  将三重和式
+  \[
+    \sum_{1 \leq i < j < k \leq 4} a_{ijk}
+  \]
+  表示成三个重叠的和式。
+  \begin{enumerate}
+    \item[a] 先对 \( k \)，再对 \( j \)，再对 \( i \) 求和。
+    \item[b] 先对 \( i \)，再对 \( j \)，再对 \( k \) 求和。
+  \end{enumerate}
+\end{problem}
+
+a 种情形：
+\begin{align*}
+  &\phantom{=} [1 \leq i < j < k \leq 4] \\
+  &= [1 \leq i < 4] [i < j < 4] [j < k \leq 4]
+\end{align*}
+即展开式中上限都为 4
+
+因此：
+\begin{align*}
+  \sum_{1 \leq i < j < k \leq 4} a_{ijk} &= \sum_{i=1}^3 \sum_{j=i+1}^3 \sum_{k=j+1}^4 a_{ijk} \\
+  &= ((a_{123} + a_{124}) + a_{134}) + a_{234}
+\end{align*}
+
+b 种情形：
+\begin{align*}
+  &\phantom{=} [1 \leq i < j < k \leq 4] \\
+  &= [1 < k \leq 4] [1 < j < k] [1 \leq i < j]
+\end{align*}
+即展开式中下限都为 1
+
+因此：
+\begin{align*}
+  \sum_{1 \leq i < j < k \leq 4} a_{ijk} &= \sum_{k=2}^4 \sum_{j=2}^{k-1} \sum_{i=1}^{j-1} a_{ijk} \\
+  &= a_{123} + (a_{124} + (a_{134} + a_{234}))
+\end{align*}
+
+\begin{problem}{2.5}{1}
+  下面的推理有何错误
+  \[
+    (\sum_{j=1}^n a_j)(\sum_{k=1}^n \frac{1}{a_k}) = \sum_{j=1}^n \sum_{k=1}^n \frac{a_j}{a_k} = \sum_{k=1}^n \sum_{k=1}^n \frac{a_k}{a_k} = \sum_{k=1}^n n = n^2
+  \]
+\end{problem}
+
+第一个等号是正确的。但第二个等号成立，仅当每个 \( a_i \) 都相等才可以。
+
+可以列式子看一下（不妨令 \( n=3 \)）：
+\begin{align*}
+  \sum_{j=1}^3 \sum_{k=1}^3 \frac{a_j}{a_k} &= a_1 (\frac{1}{a_1} + \frac{1}{a_2} + \frac{1}{a_3}) + a_2(\frac{1}{a_1} + \frac{1}{a_2} + \frac{1}{a_3}) + a_3(\frac{1}{a_1} + \frac{1}{a_2} + \frac{1}{a_3}) \\
+  &\xrightarrow{a_1 = a_2 = a_3} a(\frac{3}{a}) + a(\frac{3}{a}) + a(\frac{3}{a}) \\
+  &= \sum_{k=1}^3 3 = 3^2 = 9
+\end{align*}
+
+\begin{problem}{2.6}{1}
+  作为 \( j \) 和 \( n \) 的函数，\( \sum\nolimits_{k} [1 \le j \le k \le n] \) 的值是什么？
+\end{problem}
+
+\[
+  \sum_k [1 \leq j \leq k \leq n] =
+  \begin{cases}
+    0, & j < 1 \ \text{or} \ n < j \\
+    n - j + 1, & 1 \leq j \leq n
+  \end{cases} \ = [1 \leq j \leq n] (n - j + 1)
+\]
+
+\begin{problem}{2.7}{1}
+  设 \( \nabla f(x) = f(x) - f(x-1) \)，则 \( \nabla (x^{\overline{m}}) \) 是什么？
+\end{problem}
+
+\begin{align*}
+  \because x^{\overline{m}} &= \overbrace{x (x+1) \dots (x + m - 1)}^{m \ \text{个因子}} \\
+  \therefore \nabla (x^{\overline{m}}) &= x^{\overline{m}} - (x - 1)^{\overline{m}} \\
+  &= x (x + 1) \dots (x + m - 1) - (x - 1) x \dots (x + m - 2) \\
+  &= [x (x + 1) \dots (x + m - 2)][(x + m - 1) - (x - 1)] \\
+  &= m x^{\overline{m-1}}
+\end{align*}
+
+\begin{problem}{2.8}{1}
+  当 \( m \) 是给定的整数时，\( 0^{\underline{m}} \) 的值是多少？
+\end{problem}
+
+\begin{align*}
+  0^{\underline{m}} =
+  \begin{cases}
+    \overbrace{0 (0 - 1) \dots (0 - m + 1)}^{m \ \text{个因子}} = 0 \ , & m > 0 \\
+    \frac{1}{(0 + 1) (0 + 2) \dots (0 + m)} = \frac{1}{m!} \ , & m \leq 0
+  \end{cases}
+\end{align*}
+
+\begin{problem}{2.9}{1}
+  对于上升阶乘幂，给出类似 \( x^{\underline{m+n}} = x^{\underline{m}} (x-m)^{\underline{n}} \) 的指数法则，并用它来定义 \( x^{\overline{-n}} \).
+\end{problem}
+
+\begin{align*}
+  x^{\overline{m+n}} &= x (x + 1) \dots (x + m + n - 1) \\
+  x^{\overline{m}} &= x (x + 1) \dots (x + m - 1) \\
+  (x + m)^{\overline{n}} &= (x + m) (x + m + 1) \dots (x + m + n - 1) \\
+  \Rightarrow x^{\overline{m+n}} &= x^{\overline{m}} (x + m)^{\overline{n}}
+\end{align*}
+由定义知 \( x^{\overline{0}} = x^{\underline{0}} = 1 \)
+
+因此有：
+\begin{align*}
+  1 = x^{\overline{0}} &= x^{\overline{n - n}} \\
+  &= x^{\overline{n}} (x + n)^{\overline{-n}} \\
+  \Rightarrow (x + n)^{\overline{-n}} &= \frac{1}{x^{\overline{n}}} \\
+  \therefore x^{\overline{-n}} &= \frac{1}{(x - n)^{\overline{n}}}
+\end{align*}
+
+\subsection{基础题}
+
+\begin{problem}{2.11}{1}
+  分部求和的一般法则 \( \sum u \Delta v = uv - \sum Ev \Delta u \) 等价于
+  \[
+    \sum_{0 \leq k < n} (a_{k+1} - a_k) b_k = a_n b_n - a_0 b_0 - \sum_{0 \leq k < n} a_{k+1} (b_{k+1} - b_k), \quad n \geq 0
+  \]
+  利用分配律、结合律和交换律直接证明这个公式。
+\end{problem}
+
+证明：
+\begin{gather*}
+  \sum_{0 \leq k < n} (a_{k+1} a_k - a_k b_k) + \sum_{0 \leq k < n} (a_{k+1} b_{k+1} - a_{k+1} b_k) = a_n b_n - a_0 b_0 \\
+  \Rightarrow \sum_{0 \leq k < n} (a_{k+1} b_{k+1} - a_k b_k) = a_n b_n - a_0 b_0 \\
+  \Rightarrow (a_1 b_1 - a_0 b_0) + (a_2 b_2 - a_1 b_1) + \cdots + (a_n b_n - a_{n-1} b_{n-1}) = a_n b_n - a_0 b_0 \\
+  \Rightarrow a_n b_n - a_0 b_0 = a_n b_n - a_0 b_0
+\end{gather*}
+\hfill \( \square \)
+
+\begin{problem}{2.14}{1}
+  将 \( \sum_{k=1}^n k 2^k \) 重新改写成多重和式 \( \sum_{1 \leq j \leq k \leq n} 2^k \) 的形式并对它进行计算。
+\end{problem}
+
+\begin{align*}
+  \sum_{k=1}^n k 2^k &= \sum_{1 \leq j \leq k \leq n} 2^k \\
+  &= \sum_{1 \leq j \leq n} \sum_{j \leq k \leq n} 2^k \\
+  &= \sum_{1 \leq j \leq n} \frac{2^j (2^{n-j+1} - 1)}{2 - 1} \\
+  &= \sum_{1 \leq j \leq n} (2^{n+1} - 2^j) \\
+  &= n 2^{n+1} - \sum_{j=1}^n 2^j \\
+  &= (n - 1) 2^{n+1} + 2
+\end{align*}
+
+\begin{problem}{2.15}{1}
+  用展开和收缩方法来计算 \( C_n = \sum_{k=1}^n k^3 \)：首先记 \( C_n + S_n = 2 \sum_{1 \leq j \leq k \leq n} jk \ (S_n = \sum_{1 \leq k \leq n} k^2) \)，然后应用 \( \sum_{1 \leq j \leq k \leq n} a_j a_k = \frac{1}{2} ((\sum_{k=1}^n a_k)^2 + \sum_{k=1}^n (a_k)^2) \).
+\end{problem}
+
+\begin{align*}
+  C_n + S_n &= 2 \sum_{1 \leq j \leq k \leq n} jk = (\sum_{k=1}^n k)^2 + \sum_{k=1}^n k^2 \\
+  \Rightarrow C_n &= (\sum_{k=1}^n k)^2 \\
+  &= (\frac{n(n+1)}{2})^2
+\end{align*}
+
+\begin{problem}{2.16}{1}
+  证明 \( x^{\underline{m}} / (x - n)^{\underline{m}} = x^{\underline{n}} / (x - m)^{\underline{n}} \)，除非其中有一个分母为零。
+\end{problem}
+
+\begin{align*}
+  \because x^{\underline{m}} (x - m)^{\underline{n}} &= x(x-1) \dots (x - m + 1) (x - m) (x - m - 1) \dots (x - m - n + 1) \\
+  x^{\underline{n}} (x - n)^{\underline{m}} &= x(x - 1) \dots (x - n + 1) (x - n) (x - n - 1) \dots (x - n - m + 1) \\
+  \therefore x^{\underline{m}} (x - m)^{\underline{n}} &= x^{\underline{n}} (x - n)^{\underline{m}}
+\end{align*}
+\hfill \( \square \)
+
+\begin{problem}{2.17}{1}
+  证明：对于所有的整数 \( m \)，下面的公式可以用来在上升阶乘幂与下降阶乘幂之间进行转换：
+  \begin{align*}
+    x^{\overline{m}} &= (-1)^m (-x)^{\underline{m}} = (x + m - 1)^{\underline{m}} = 1 / (x - 1)^{\underline{-m}} \\
+    x^{\underline{m}} &= (-1)^m (-x)^{\overline{m}} = (x - m + 1)^{\overline{m}} = 1 / (x + 1)^{\overline{-m}}
+  \end{align*}
+  （习题~\ref{problem:2.9}~的答案给出了 \( x^{\overline{-m}} \) 的定义。）
+\end{problem}
+
+用数学归纳法证明：
+\begin{enumerate}
+  \item 当 \( m = 0 \) 时，
+    \begin{align*}
+      x^{\overline{0}} &= (-1)^0 (-x)^{\underline{0}} = (x + 0 - 1)^{\underline{0}} = \frac{1}{(x - 1)^{\underline{-0}}} = 1 \\
+      x^{\underline{0}} &= (-1)^0 (-x)^{\overline{0}} = (x - 0 + 1)^{\overline{0}} = \frac{1}{(x + 1)^{\overline{-0}}} = 1
+    \end{align*}
+  \item 假设当 \( m = k \) 时，等式成立，则有：
+    \begin{align*}
+      x^{\overline{k}} &= (-1)^k (-x)^{\underline{k}} = (x + k - 1)^{\underline{k}} = \frac{1}{(x - 1)^{\underline{-k}}} \\
+      x^{\underline{k}} &= (-1)^k (-x)^{\overline{k}} = (x - k + 1)^{\overline{k}} = \frac{1}{(x + 1)^{\overline{-k}}}
+    \end{align*}
+  \item 当 \( m = k + 1 \) 时，
+    \begin{align*}
+      x^{\overline{k+1}} &= x^{\overline{k}} (x + k) \\
+      &= (-1)^k (-x)^{\underline{k}} (-1) (-x - k) \\
+      &= (-1)^{k+1} (-x)^{\underline{k+1}} \\
+      &= (x + k) (x + k - 1)^{\underline{k}} \\
+      &= (x + k)^{\underline{k+1}} \\
+      &= \frac{x + k}{(x - 1)^{\underline{-k}}} \\
+      &= \frac{1}{(x - 1)^{\underline{-k - 1}}} \\
+      x^{\underline{k+1}} &= x^{\underline{k}} (x - k) \\
+      &= (-1)^k (-x)^{\overline{k}} (-1) (-x + k) \\
+      &= (-1)^{k+1} (-x)^{\overline{k+1}} \\
+      &\phantom{=} \vdots
+    \end{align*}
+    所以当 \( m = k + 1 \) 时，等式成立。
+\end{enumerate}
+
+由~\ref{problem:2.9}~知：
+\begin{align*}
+  x^{\overline{-m}} &= \frac{1}{(x - m)^{\overline{m}}} \\
+  x^{\underline{-m}} &= \frac{1}{(x + m)^{\underline{m}}}
+\end{align*}
+所以当 \( m < 0 \) 时，同理可证等式仍然成立。
+
+综上所述，原命题成立。
+
+\hfill \( \square \)
+
+\subsection{作业题}
+
+\begin{problem}{2.19}{2}
+  利用求和因子来求解递归式：
+  \begin{align*}
+    T_0 &= 5 \\
+    2 T_n &= n T_{n-1} + 3 \times n! \ , \quad n > 0
+  \end{align*}
+\end{problem}
+
+首先介绍一下求和因子法：
+
+在等式 \( a_n T_n = b_n T_{n-1} + c_n \) 两边同时乘以求和因子（summation factor）\( s_n \)，得到 \( s_n a_n T_n = s_n b_n T_{n-1} + s_n c_n \)，其中 \( s_n \) 的选取需要满足：\( s_n b_n = s_{n-1} a_{n-1} \)
+
+记 \( S_n = s_n a_n T_n \)，有 \( S_n = S_{n-1} + s_n c_n \)，从而：\( S_n = s_0 a_0 T_0 + \sum_{k=1}^n s_k c_k = s_1 b_1 T_0 + \sum_{k=1}^n s_k c_k \)
+
+原来的递归式的解为：\( T_n = \frac{1}{s_n a_n} (s_1 b_1 T_0 + \sum_{k=1}^n s_k c_k) \)，而由关系式 \( s_n = \frac{s_{n-1} a_{n-1}}{b_n} \) 得到 \( s_n = \frac{a_{n-1} a_{n-2} \dots a_1}{b_n b_{n-1} \dots b_2} \)
+
+也许有人好奇 \( s_1 \) 哪去了，这里书中~\cite{graham1994concrete}~旁白有一个提示：（\( s_1 \) 的值消去了，所以它可以是除零以外的任何数）。
+意思是，要想使用求和因子法，这个因子就绝不能是零，因此无论 \( s_1 \) 是多少都不重要，当你在方程两边乘以这个因子时，\( s_1 \) 同时被带到了方程两边，可以消去。其实你也可以把 \( s_n = \frac{a_{n-1} a_{n-2} \dots a_1}{b_n b_{n-1} \dots b_2} \) 写作 \( s_n = \frac{a_{n-1} a_{n-2} \dots a_1}{b_n b_{n-1} \dots b_2} s_1 \)，反正最后 \( s_1 \) 都被消掉了。同理，你也可以选择迭代到 \( s_2 \) 停止，但求和因子法的关键在于利用 \( a_n \) 和 \( b_n \) 连乘来达到化简题目的目的。
+
+下面利用这一方法来解决此题：
+\begin{align*}
+  s_n &= \frac{2^{n-1}}{n (n-1) \dots 2} = \frac{2^{n-1}}{n!} \\
+  \xrightarrow{\text{两边乘} \ s_n} 2 T_n s_n &= n s_n T_{n-1} + 3 s_n n! \\
+  \Rightarrow \frac{2^n}{n!} T_n &= \frac{2^{n-1}}{(n-1)!} T_{n-1} + 3 \times 2^{n-1} \\
+  \xrightarrow{\text{记} \ S_n = \frac{2^n}{n!} T_n} S_n &= S_{n-1} + 3 \times 2^{n-1} \\
+  \Rightarrow S_n &= 5 + \sum_{k=1}^n 3 \times 2^{k-1} \\
+  \Rightarrow T_n &= \frac{n!}{2^n} (5 + \sum_{k=1}^n 3 \times 2^{k-1}) \\
+  \Rightarrow T_n &= \frac{n!}{2^{n-1}} + 3 n!
+\end{align*}
+
+\begin{problem}{2.20}{2}
+  试用扰动法计算 \( \sum_{k=0}^n k H_k \)，不过改为推导出 \( \sum_{k=0}^n H_k \) 的值。
+\end{problem}
+
+\begin{align*}
+  \sum_{k=0}^n k H_k + (n + 1) H_{n+1} &= \sum_{k=0}^{n+1} k H_k \\
+  &= \sum_{k=1}^{n+1} k H_k \\
+  &= \sum_{k+1=1}^{n+1} (k + 1) H_{k+1} \\
+  &= \sum_{k=0}^n (k + 1) H_{k+1} \\
+  &= \sum_{k=0}^n k H_{k+1} + \sum_{k=0}^n H_{k+1} \\
+  \Rightarrow (n + 1) H_{n+1} - \sum_{k=0}^n H_{k+1} &= \sum_{k=0}^n k H_{k+1} - \sum_{k=0}^n k H_k \\
+  &= \sum_{k=0}^n \frac{k}{k+1} = \sum_{k=0}^n (1 - \frac{1}{k+1}) \\
+  &= n + 1 - H_{n+1} \\
+  \Rightarrow (n + 2) H_{n+1} - n - 1 &= \sum_{k=0}^n H_k - H_0 + H_{n+1} \\
+  \Rightarrow \sum_{k=0}^n H_k &= (n + 1) H_{n+1} - n - 1
+\end{align*}
+
+\begin{problem}{2.21}{2}
+  假设 \( n \ge 0 \)，用扰动法计算和式：\( S_n = \sum_{k=0}^n (-1)^{n-k} \ , \quad T_n = \sum_{k=0}^n (-1)^{n-k} k \ , \quad U_n = \sum_{k=0}^n (-1)^{n-k} k^2 \).
+\end{problem}
+
+\begin{align*}
+  S_{n+1} &= \sum_{k=0}^{n+1} (-1)^{n + 1 - k} = (-1)^{n+1} + \sum_{k=1}^{n+1} (-1)^{n + 1 - k} \\
+  &= (-1)^{n+1} + \sum_{k+1=1}^{n+1} (-1)^{n-k} \\
+  &= (-1)^{n+1} + \sum_{k=0}^n (-1)^{n-k} \\
+  &= (-1)^{n+1} + S_n \\
+  S_{n+1} &= \sum_{k=0}^{n+1} (-1)^{n+1-k} = (-1)^0 + \sum_{k=0}^n (-1)^{n+1-k} \\
+  &= 1 + (-1) \sum_{k=0}^n (-1)^{n-k} \\
+  &= 1 - S_n \\
+  \Rightarrow S_n + (-1)^{n+1} &= 1 - S_n \\
+  \Rightarrow S_n &= \frac{1 - (-1)^{n+1}}{2}
+\end{align*}
+
+\begin{align*}
+  T_{n+1} &= \sum_{k=0}^{n+1} (-1)^{n+1-k} k = \sum_{k=1}^{n+1} (-1)^{n+1-k} k \\
+  &= \sum_{k+1=1}^{n+1} (-1)^{n-k} (k + 1) \\
+  &= \sum_{k=0}^n (-1)^{n-k} (k + 1) \\
+  &= T_n + S_n \\
+  \Rightarrow T_{n+1} &= \sum_{k=0}^{n+1} (-1)^{n+1-k} k = (-1)^0 (n + 1) + \sum_{k=0}^n (-1)^{n+1-k} k \\
+  &= n + 1 - \sum_{k=0}^n (-1)^{n-k} k \\
+  &= n + 1 - T_n \\
+  \Rightarrow T_n &= \frac{n + 1 - S_n}{2}
+\end{align*}
+
+\begin{align*}
+  U_{n+1} &= \sum_{k=0}^{n+1} (-1)^{n+1-k} k^2 = \sum_{k=1}^{n+1} (-1)^{n+1-k} k^2 \\
+  &= \sum_{k+1=1}^{n+1} (-1)^{n-k} (k + 1)^2 \\
+  &= \sum_{k=0}^n (-1)^{n-k} (k^2 + 2k + 1)^2 \\
+  &= U_n + 2 T_n + S_n \\
+  U_{n+1} &= \sum_{k=0}^{n+1} (-1)^{n+1-k} k^2 = (n+1)^2 + \sum_{k=0}^n (-1)^{n+1-k} k^2 \\
+  &= (n + 1)^2 - U_n \\
+  \Rightarrow U_n &= \frac{(n+1)^2 - 2 T_n - S_n}{2} = \frac{1}{2} n (n + 1)
+\end{align*}
+
+\begin{problem}{2.22}{2}
+  （不用归纳法）证明拉格朗日恒等式：
+  \[
+    \sum_{1 \leq j < k \leq n} (a_j b_k - a_k b_j)^2 = (\sum_{k=1}^n a_k^2) (\sum_{k=1}^n b_k^2) - (\sum_{k=1}^n a_k b_k)^2
+  \]
+  事实上，可证明一个关于更一般的二重和式
+  \[
+    \sum_{1 \leq j < k \leq n} (a_j b_k - a_k b_j) (A_j B_k - A_k B_j)
+  \]
+  的恒等式。
+\end{problem}
+
+记 \( S_n = \sum_{1 \leq j < k \leq n} (a_j b_k - a_k b_j)^2 \)，有
+\begin{align*}
+  S_n &= \sum_{1 \leq k < j \leq n} (a_k b_j - a_j b_k)^2 \\
+  &=  \sum_{1 \leq k < j \leq n} (a_j b_k - a_k b_j)^2
+\end{align*}
+又 \( [1 \leq j < k \leq n] + [1 \leq k < j \leq n] = [1 \leq j, k \leq n] - [1 \leq j = k \leq n] \)（将 \( j, k \) 看作是 \( n \) 阶矩阵的行和列，因此，矩阵的上三角部分（除去对角线）的元素相加，加上下三角部分（除去对角线）的元素相加，等于矩阵所有元素之和减去对角线元素之和）
+
+因此
+\begin{align*}
+  2 S_n &= \sum_{1 \leq j, k \leq n} (a_j b_k - a_k b_j)^2 - \sum_{1 \leq j = k \leq n} (a_j b_k - a_k b_j)^2 \\
+  &= \sum_{1 \leq j, k \leq n} (a_j^2 b_k^2 - 2 a_j b_k a_k b_j + a_k^2 b_j^2) \\
+  &= 2 \sum_{1 \leq j \leq n} \sum_{1 \leq k \leq n} a_j^2 b_k^2 - 2 \sum_{1 \leq j \leq n} \sum_{1 \leq k \leq n} (a_j b_k a_k b_j) \\
+  &= 2(\sum_{1 \leq k \leq n} a_k^2)(\sum_{1 \leq k \leq n} b_k^2) - 2(\sum_{1 \leq k \leq n} a_k b_k)^2 \\
+  \Rightarrow \sum_{1 \leq j < k \leq n} (a_j b_k - a_k b_j)^2 &= (\sum_{k=1}^n a_k^2)(\sum_{k=1}^n b_k^2) - (\sum_{k=1}^n a_k b_k)^2
+\end{align*}
+
+记 \( T_n = \sum_{1 \leq j < k \leq n} (a_j b_k - a_k b_j) (A_j B_k - A_k B_j) \)，有
+\begin{align*}
+  T_n &= \sum_{1 \leq k < j \leq n} (a_k b_j - a_j b_k) (A_k B_j - A_j B_k) \\
+  &= \sum_{1 \leq k < j \leq n} (a_j b_k - a_k b_j) (A_j B_k - A_k B_j) \\
+  \Rightarrow 2 T_n &= \sum_{1 \leq j, k \leq n} (a_j b_k - a_k b_j) (A_j B_k - A_k B_j) - 0 \\
+  &= \sum_{1 \leq j, k \leq n} (a_j A_j b_k B_k - a_j b_k A_k B_j - a_k b_j A_j B_k + a_k A_k b_j B_j) \\
+  &= \sum_{1 \leq j, k \leq n} (a_j A_j b_k B_k + a_k A_k b_j B_j) - \sum_{1 \leq j, k \leq n} (a_j b_k A_k B_j + a_k b_j A_j B_k) \\
+  &= 2 \sum_{1 \leq k \leq n} a_k A_k \sum_{1 \leq k \leq n} b_k B_k - 2 \sum_{1 \leq k \leq n} a_k B_k \sum_{1 \leq k \leq n} b_k A_k \\
+  \Rightarrow T_n &= \sum_{1 \leq k \leq n} a_k A_k \sum_{1 \leq k \leq n} b_k B_k - \sum_{1 \leq k \leq n} a_k B_k \sum_{1 \leq k \leq n} b_k A_k
+\end{align*}
+
+\begin{problem}{2.23}{2}
+  用两种方法计算和式 \( \sum_{k=1}^n (2k + 1) / k (k+1) \)：
+  \begin{enumerate}
+    \item[a] 用部分分式 \( 1 / k - 1 / (k + 1) \) 替换 \( 1 / k (k + 1) \)
+    \item[b] 分部求和法
+  \end{enumerate}
+\end{problem}
+
+a.
+\begin{align*}
+  &\phantom{=} \sum_{k=1}^n (2k + 1) (\frac{1}{k} - \frac{1}{k+1}) \\
+  &= \sum_{k=1}^n \frac{2k + 1}{k} - \sum_{k=1}^n \frac{2k + 2 - 1}{k+1} \\
+  &= \sum_{k=1}^n (2 + \frac{1}{k}) - \sum_{k=1}^n (2 - \frac{1}{k+1}) \\
+  &= H_n + H_{n+1} - 1
+\end{align*}
+
+b. 分部求和法：\( \sum u \Delta v = uv - \sum Ev \Delta u \)
+\begin{align*}
+  \sum_{k=1}^n \frac{2k+1}{k(k+1)} &= \sum_{x=1}^{n+1} (2x + 1) \delta (\frac{-1}{x}) \\
+  &= \left. \frac{2x + 1}{-x} \right|_1^{n+1} - \sum_{x=1}^{n+1} \frac{-1}{x+1} \delta (2x + 1) \\
+  &= (1 - \frac{1}{n+1}) + 2 \sum_{x=1}^{n+1} \frac{1}{x+1} \delta x \\
+  &= (1 - \frac{1}{n+1}) + 2 \left. H_x \right|_1^{n+1} \\
+  &= (1 - \frac{1}{n+1}) + 2 H_{n+1} - 2 \\
+  &= 2 H_{n+1} - 1 - \frac{1}{n+1}
+\end{align*}
+
+\begin{problem}{2.24}{2}
+  \( \sum_{0 \leq k < n} H_k / (k + 1)(k + 2) \) 等于多少？
+\end{problem}
+
+\begin{align*}
+  \sum_{0 \leq k < n} \frac{H_k}{(k + 1) (k + 2)} &= \sum_{x=0}^n H_x x^{\underline{-2}} \delta x \\
+  &= \sum_{x=0}^n H_x \delta (-x^{\underline{-1}}) \\
+  &= \left. (H_x (-x^{\underline{-1}})) \right|_0^n - \sum_{x=0}^n (-(x+1)^{\underline{-1}}) \delta(H_x) \\
+  &= -n^{\underline{-1}} H_n + \sum_{x=0}^n (x+1)^{\underline{-1}} x^{\underline{-1}} \delta x \\
+  &= -n^{\underline{-1}} H_n + \sum_{x=0}^n x^{\underline{-2}} \delta x \\
+  &= -n^{\underline{-1}} H_n + \left. \frac{x^{\underline{-1}}}{-1} \right|_0^n \\
+  &= -n^{\underline{-1}} H_n - (n^{\underline{-1}} - 0^{\underline{-1}}) \\
+  &= 1 - n^{\underline{-1}} (H_n + 1)
+\end{align*}
+
+\begin{problem}{2.27}{2}
+  计算 \( \Delta (c^{\underline{x}}) \)，并用它来推导出 \( \sum_{k=1}^n \frac{(-2)^{\underline{k}}}{k} \) 的值。
+\end{problem}
+
+\begin{align*}
+  &\phantom{=} \Delta (c^{\underline{x}}) \\
+  &= c^{\underline{x+1}} - c^{\underline{x}} \\
+  &= c(c-1) \dots (c-x) - c(c-1) \dots (c-x+1) \\
+  &= c(c-1) \dots (c-x+1) (c-x-1) \\
+  &= c^{\underline{x}} (c-x-1) = \frac{c^{\underline{x+2}}}{c-x} \\
+  \Rightarrow \sum_{k=1}^n \frac{(-2)^{\underline{k}}}{k} &= \sum_{x=1}^{n+1} \frac{(-2)^{\underline{x}}}{x} \delta x = \sum_{x=1}^{n+1} \delta (-(-2)^{\underline{x-2}}) \\
+  &= \left. (-(-2)^{\underline{x-2}}) \right|_1^{n+1} \\
+  &= -1 - (-1)^{n-1} (2)^{\overline{n-1}} \\
+  &= -1 - (-1)^{n-1} n!
+\end{align*}
+
+\subsection{考试题}
+
+\begin{problem}{2.29}{3}
+  计算和式 \( \sum_{k=1}^n (-1)^k k / (4 k^2 - 1) \).
+\end{problem}
+
+\begin{align*}
+  \sum_{k=1}^n \frac{(-1)^k k}{4 k^2 - 1} &= \sum_{k=1}^n \frac{1}{4} (-1)^k (\frac{1}{2k - 1} + \frac{1}{2k + 1}) \\
+  &= \frac{1}{4} (-(\frac{1}{1} + \frac{1}{3}) + (\frac{1}{3} + \frac{1}{5}) - (\frac{1}{5} - \frac{1}{7}) \cdots + (-1)^n (\frac{1}{2n - 1} + \frac{1}{2n + 1})) \\
+  &= \frac{1}{4} (-1 + (-1)^n \frac{1}{2n + 1})
+\end{align*}
+
+\begin{problem}{2.31}{3}
+  黎曼 \( \text{zeta} \) 函数 \( \zeta (k) \) 定义为无限和式：
+  \[
+    1 + \frac{1}{2^k} + \frac{1}{3^k} + \cdots = \sum_{j \geq 1} \frac{1}{j^k}
+  \]
+  证明 \( \sum_{k \geq 2} (\zeta (k) - 1) = 1 \). \( \sum_{k \geq 1} (\zeta (2k) - 1) \) 的值是什么？
+\end{problem}
+
+\begin{align*}
+  \sum_{k \geq 2} (\zeta (k) - 1) &= \sum_{k \geq 2} (\sum_{j \geq 1} \frac{1}{j^k} - 1) \\
+  &= \sum_{k \geq 2} \sum_{j \geq 2} \frac{1}{j^k} \\
+  &= \sum_{j \geq 2} \sum_{k \geq 2} \frac{1}{j^k} \\
+  &= \sum_{j \geq 2} \frac{1}{j(j-1)} \\
+  &= \sum_{j \geq 2} (\frac{1}{j-1} - \frac{1}{j}) \\
+  &= 1
+\end{align*}
+
+\begin{align*}
+  \sum_{k \geq 1} (\zeta(2k) - 1) &= \sum_{k \geq 1} (\sum_{j \geq 1} \frac{1}{j^{2k}} - 1) \\
+  &= \sum_{k \geq 1} \sum_{j \geq 2} \frac{1}{j^{2k}} \\
+  &= \sum_{j \geq 2} \sum_{k \geq 1} \frac{1}{j^{2k}} \\
+  &= \sum_{j \geq 2} \frac{1}{j^2 - 1} \\
+  &= \frac{1}{2} \sum_{j \geq 2} (\frac{1}{j-1} - \frac{1}{j+1}) \\
+  &= \frac{3}{4}
+\end{align*}
